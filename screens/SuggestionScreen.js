@@ -1,49 +1,121 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
 import { FAB, RadioButton } from 'react-native-paper';
 import Colors from '../styles/Colors.js';
 
 export default function SuggestionScreen() {
 
-    const [radioValue, setRadioValue] = useState('');
+    const [playerInput, setPlayerInput] = useState('');
+    const [suspectInput, setSuspectInput] = useState('');
 
-    return (
-    <View style={styles.container}>
+    const [formStage, setFormStage] = useState(0);
 
-      <Text style={styles.headerText}>Whose turn is it?</Text>
+    // == FORM STAGES ==
+    // 0: Player
+    // 1: Suspect
+    // 2: Weapon
+    // 3: Room
+    // 4: Confirm
 
-      <View style={styles.radioGroup}>
-        <RadioButton.Group
-            onValueChange={value => setRadioValue(value)}
-            value={radioValue}
-        >
-          <TouchableOpacity style={styles.radioContainer} onPress={ () => setRadioValue('Joel') }>
-              <RadioButton value='Joel' color={Colors.primary}/>
-              <Text style={styles.radioText}>Joel</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.radioContainer} onPress={ () => setRadioValue('B Man') }>
-              <RadioButton value='B Man' color={Colors.primary}/>
-              <Text style={styles.radioText}>B Man</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.radioContainer} onPress={ () => setRadioValue('Me') }>
-              <RadioButton value='Me' color={Colors.primary}/>
-              <Text style={[styles.radioText, {fontWeight: 'bold'}]}>Me</Text>
-          </TouchableOpacity>
+    function handleNext() {
+      console.log('next');
+      setFormStage(formStage + 1);
+    }
 
-        </RadioButton.Group>
-      </View>
-      <Text>Selected option: {radioValue}</Text>
+    const players = [
+      {key: '1', name: 'Joel'},
+      {key: '2', name: 'Bryan'},
+      {key: '3', name: 'Me'},
+      {key: '4', name: 'Dad'},
+    ];
 
-      <FAB 
-          disabled={ !radioValue }
-          style={ [styles.fab, {backgroundColor: radioValue ? 'green' : 'gray'} ]} 
-          icon='check' 
-          color='white' 
-          onPress={() => console.log('FAB pressed')}
-      />
-    </View>
-    );
+    const suspects = [
+      {key: '1', name: 'Col. Mustard'},
+      {key: '2', name: 'Miss White'},
+      {key: '3', name: 'Miss Scarlet'},
+      {key: '4', name: 'Lebanon Levi'},
+      {key: '5', name: 'Lebanon Eli'},
+      {key: '6', name: 'The Ex Amish'},
+    ];
+
+    switch (formStage) {
+      case 0:
+        return (
+          <View style={styles.container}>
+      
+            <Text style={styles.headerText}>Whose turn is it?</Text>
+      
+            <View style={styles.radioGroup}>
+              <RadioButton.Group
+                  onValueChange={value => setPlayerInput(value)}
+                  value={playerInput}
+              >
+                <FlatList
+                  data={players}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity style={styles.radioContainer} onPress={ () => setPlayerInput(item.name) }>
+                      <RadioButton value={item.name} color={Colors.primary}/>
+                      <Text style={styles.radioText}>{item.name}</Text>
+                    </TouchableOpacity>
+                  )}
+                />
+      
+              </RadioButton.Group>
+            </View>
+      
+            <FAB 
+                disabled={ !playerInput }
+                style={ [styles.fab, {backgroundColor: playerInput ? 'green' : 'gray'} ]} 
+                icon='check' 
+                color='white' 
+                onPress={handleNext}
+            />
+          </View>
+        );
+      case 1:
+        return (
+          <View style={styles.container}>
+      
+            <Text style={styles.headerText}>Which suspect?</Text>
+      
+            <View style={styles.radioGroup}>
+              <RadioButton.Group
+                  onValueChange={value => setSuspectInput(value)}
+                  value={suspectInput}
+              >
+                <FlatList
+                  data={suspects}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity style={styles.radioContainer} onPress={ () => setSuspectInput(item.name) }>
+                      <RadioButton value={item.name} color={Colors.primary}/>
+                      <Text style={styles.radioText}>{item.name}</Text>
+                    </TouchableOpacity>
+                  )}
+                />
+      
+              </RadioButton.Group>
+            </View>
+      
+            <FAB 
+                disabled={ !suspectInput }
+                style={ [styles.fab, {backgroundColor: suspectInput ? 'green' : 'gray'} ]} 
+                icon='check' 
+                color='white' 
+                onPress={handleNext}
+            />
+          </View>
+        );
+      case 2:
+        return (
+          <View style={styles.container}>
+            <Text>Suggestion recorded as -</Text>
+            <Text>Player: {playerInput}</Text>
+            <Text>Suspect: {suspectInput}</Text>
+          </View>
+        );
+    }
 }
+
 
 const styles = StyleSheet.create({
   container: {
