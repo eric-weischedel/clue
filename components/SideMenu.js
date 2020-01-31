@@ -26,7 +26,7 @@ export default function SideMenu({ navigation }) {
                 <TouchableOpacity style={styles.navItem}>
                     <Icon
                         style={styles.navIcon}
-                        name='book-open'
+                        name='clock'
                         type='feather'
                         color='#000'
                         size={24}
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     menuHeaderText: {
         fontSize: 18,
         color: '#000',
-        marginLeft: 25,
+        marginLeft: 20,
         marginVertical: 20,
     },
     navItem: {
@@ -71,15 +71,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        paddingLeft: 25,
+        paddingLeft: 20,
         backgroundColor: '#fff',
-        paddingVertical: 15
+        paddingVertical: 15,
     },
     navIcon: {
         backgroundColor: '#fff'
     },
     navText: {
-        marginLeft: 10,
+        marginLeft: 15,
         fontSize: 16,
         color: '#000',
     }

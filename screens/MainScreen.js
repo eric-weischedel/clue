@@ -27,7 +27,7 @@ export default function MainScreen({ navigation }) {
         disabled={ FABDisabled } 
         style={ [styles.fab, FABDisabled ? {backgroundColor: 'gray'} : {backgroundColor: Colors.primary}] } 
         color='white'
-        icon='plus' 
+        icon='lightbulb-on' 
         onPress={() => navigation.push('Suggestion')} 
       />
     </SafeAreaView>
