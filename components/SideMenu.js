@@ -9,7 +9,7 @@ export default function SideMenu({ navigation }) {
         <ScrollView style={{borderLeftColor: '#000', borderLeftWidth: 1, borderStyle: 'solid'}}>
             <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }} >
                 <View style={styles.menuHeaderContainer}>
-                    <Text style={styles.menuHeaderText}>Action Menu</Text>
+                    <Text style={styles.menuHeaderText}>Clue Me In</Text>
                 </View>
 
                 <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Notes')}>
@@ -23,7 +23,7 @@ export default function SideMenu({ navigation }) {
                     <Text style={styles.navText}>Notes</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.navItem}>
+                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('History')}>
                     <Icon
                         style={styles.navIcon}
                         name='clock'

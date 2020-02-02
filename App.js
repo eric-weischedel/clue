@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
-import { StyleSheet, Text, View, StatusBar, SafeAreaView } from 'react-native';
+import { StatusBar, SafeAreaView } from 'react-native';
 
 import DrawerNavigator from './navigation/DrawerNavigator.js';
 
 const getFonts = () => Font.loadAsync({
   'poppins-regular': require('./assets/fonts/Poppins-Regular.ttf'),
-  'poppins-medium': require('./assets/fonts/Poppins-Medium.ttf')
+  'poppins-medium': require('./assets/fonts/Poppins-Medium.ttf'),
+  'robotomono-light': require('./assets/fonts/RobotoMono-Light.ttf'),
+  'robotomono-regular': require('./assets/fonts/RobotoMono-Regular.ttf'),
 });
 
 export default function App() {

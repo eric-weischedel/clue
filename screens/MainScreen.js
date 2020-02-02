@@ -15,7 +15,7 @@ export default function MainScreen({ navigation }) {
     <SafeAreaView style={{ flex: 1 }}>
       {/* Header */}
       <View style={styles.headerContainer}>
-        <Text style={ styles.headerText }>Clue Me In</Text>
+        <Text style={ styles.headerText }>Prospects</Text>
         <TouchableOpacity style={ styles.menuButton } onPress={() => navigation.openDrawer()}>
           <Icon name='navicon' type='evilicon' size={28} color={Colors.primary}/>
         </TouchableOpacity>
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   fab: {
     position: 'absolute',
     right: 20,
-    bottom: 70,
+    bottom: 100,
   },
   headerText: {
     fontSize: 20,

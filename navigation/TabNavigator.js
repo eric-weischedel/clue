@@ -74,7 +74,7 @@ const TabNavigator = createMaterialTopTabNavigator({
         top: 0
       },
       showIcon: true,
-      showLabel: false
+      showLabel: true
     }
   });
 
