@@ -1,7 +1,5 @@
-import React from 'react';
 import { createAppContainer } from 'react-navigation';
-import { createDrawerNavigator, DrawerItems } from 'react-navigation-drawer';
-import { Icon } from 'react-native-elements'
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import MainStack from './MainStack.js';
 import SecondaryScreen from '../screens/SecondaryScreen.js';

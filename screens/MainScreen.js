@@ -9,7 +9,7 @@ import { getCards } from '../algorithm/getCards.js';
 
 export default function MainScreen({ navigation }) {
 
-  const FABDisabled = false;
+  const cards = getCards();
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -21,11 +21,10 @@ export default function MainScreen({ navigation }) {
         </TouchableOpacity>
       </View>
       {/* Tabs */}
-      <TabNavigator screenProps={ getCards() } />
+      <TabNavigator screenProps={ cards } />
       {/* FAB */}
       <FAB 
-        disabled={ FABDisabled } 
-        style={ [styles.fab, FABDisabled ? {backgroundColor: 'gray'} : {backgroundColor: Colors.primary}] } 
+        style={styles.fab} 
         color='white'
         icon='lightbulb-on' 
         onPress={() => navigation.push('Suggestion')} 
@@ -39,6 +38,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 20,
     bottom: 100,
+    backgroundColor: Colors.primary
   },
   headerText: {
     fontSize: 20,

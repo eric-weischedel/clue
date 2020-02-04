@@ -20,7 +20,8 @@ export default function SuggestionScreen() {
     // 1: Suspect
     // 2: Weapon
     // 3: Room
-    // 4: Confirm
+    // 4: Revealer
+    // 5: Save history and update probabilities
 
     function handleNext() {
       setFormStage(formStage + 1);
