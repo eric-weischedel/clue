@@ -5,6 +5,7 @@ import PlayerForm from '../components/SuggestionPlayerForm.js';
 import SuspectForm from '../components/SuggestionSuspectForm.js';
 import WeaponForm from '../components/SuggestionWeaponForm.js';
 import RoomForm from '../components/SuggestionRoomForm.js';
+import RevealerForm from '../components/SuggestionRevealerForm.js';
 
 export default function SuggestionScreen() {
 
@@ -12,6 +13,7 @@ export default function SuggestionScreen() {
     const [suspectInput, setSuspectInput] = useState('');
     const [weaponInput, setWeaponInput] = useState('');
     const [roomInput, setRoomInput] = useState('');
+    const [revealerInput, setRevealerInput] = useState('');
 
     const [formStage, setFormStage] = useState(0);
 
@@ -46,12 +48,17 @@ export default function SuggestionScreen() {
         );
       case 4:
         return (
+          <RevealerForm revealerInput={revealerInput} setRevealerInput={setRevealerInput} handleNext={handleNext}/>
+        );
+      case 5:
+        return (
           <View style={styles.container}>
             <Text>Suggestion recorded as -</Text>
             <Text>Player: {playerInput}</Text>
             <Text>Suspect: {suspectInput}</Text>
             <Text>Weapon: {weaponInput}</Text>
             <Text>Room: {roomInput}</Text>
+            <Text>Revealer: {revealerInput}</Text>
           </View>
         );
     }
