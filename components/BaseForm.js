@@ -88,6 +88,6 @@ const styles = StyleSheet.create({
     fab: {
       position: 'absolute',
       right: 20,
-      bottom: 70,
+      bottom: 30,
     }
   });

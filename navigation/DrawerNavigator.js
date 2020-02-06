@@ -8,6 +8,7 @@ import SuggestionScreen from '../screens/SuggestionScreen.js';
 import HistoryScreen from '../screens/HistoryScreen.js';
 import SideMenu from '../components/SideMenu.js';
 import SaveScreen from '../screens/SaveScreen.js';
+import NewGameScreen from '../screens/NewGameScreen.js';
 
 const DrawerNavigator = createDrawerNavigator(
     {
@@ -25,6 +26,9 @@ const DrawerNavigator = createDrawerNavigator(
       },
       Save: {
         screen: SaveScreen
+      },
+      NewGame: {
+        screen: NewGameScreen
       },
       Secondary: {
         screen: SecondaryScreen

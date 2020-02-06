@@ -6,6 +6,7 @@ import NotesScreen from '../screens/NotesScreen.js';
 import SuggestionScreen from '../screens/SuggestionScreen.js';
 import HistoryScreen from '../screens/HistoryScreen.js';
 import SaveScreen from '../screens/SaveScreen.js';
+import NewGameScreen from '../screens/NewGameScreen.js';
 
 const screens = {
   Main: {
@@ -25,6 +26,12 @@ const screens = {
   },
   Save: {
     screen: SaveScreen
+  },
+  NewGame: {
+    screen: NewGameScreen,
+    navigationOptions: {
+      title: 'New Game'
+    }
   }
 };
 

@@ -45,6 +45,17 @@ export default function SideMenu({ navigation }) {
                     <Text style={styles.navText}>Save JSON</Text>
                 </TouchableOpacity>
 
+                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('NewGame')}>
+                    <Icon
+                        style={styles.navIcon}
+                        name='plus-circle'
+                        type='feather'
+                        color='#000'
+                        size={24}
+                    />
+                    <Text style={styles.navText}>New Game</Text>
+                </TouchableOpacity>
+
             </SafeAreaView>
         </ScrollView>
     );
