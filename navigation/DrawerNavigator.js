@@ -7,6 +7,7 @@ import NotesScreen from '../screens/NotesScreen';
 import SuggestionScreen from '../screens/SuggestionScreen.js';
 import HistoryScreen from '../screens/HistoryScreen.js';
 import SideMenu from '../components/SideMenu.js';
+import SaveScreen from '../screens/SaveScreen.js';
 
 const DrawerNavigator = createDrawerNavigator(
     {
@@ -21,6 +22,9 @@ const DrawerNavigator = createDrawerNavigator(
       },
       History: {
         screen: HistoryScreen
+      },
+      Save: {
+        screen: SaveScreen
       },
       Secondary: {
         screen: SecondaryScreen

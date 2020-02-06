@@ -34,15 +34,15 @@ export default function SideMenu({ navigation }) {
                     <Text style={styles.navText}>History</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.navItem}>
+                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Save')}>
                     <Icon
                         style={styles.navIcon}
-                        name='plus-square'
+                        name='save'
                         type='feather'
                         color='#000'
                         size={24}
                     />
-                    <Text style={styles.navText}>New Game</Text>
+                    <Text style={styles.navText}>Save JSON</Text>
                 </TouchableOpacity>
 
             </SafeAreaView>

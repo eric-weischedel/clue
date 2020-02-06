@@ -5,6 +5,7 @@ import MainScreen from '../screens/MainScreen.js';
 import NotesScreen from '../screens/NotesScreen.js';
 import SuggestionScreen from '../screens/SuggestionScreen.js';
 import HistoryScreen from '../screens/HistoryScreen.js';
+import SaveScreen from '../screens/SaveScreen.js';
 
 const screens = {
   Main: {
@@ -21,6 +22,9 @@ const screens = {
   },
   History: {
     screen: HistoryScreen
+  },
+  Save: {
+    screen: SaveScreen
   }
 };
 
