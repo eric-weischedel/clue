@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import * as FileSystem from 'expo-file-system';
 
 import PlayerForm from '../components/SuggestionPlayerForm.js';
 import SuspectForm from '../components/SuggestionSuspectForm.js';
@@ -14,6 +15,7 @@ export default function SuggestionScreen() {
     const [weaponInput, setWeaponInput] = useState('');
     const [roomInput, setRoomInput] = useState('');
     const [revealerInput, setRevealerInput] = useState('');
+    const [saveJson, setSaveJson] = useState('');
 
     const [formStage, setFormStage] = useState(0);
 
@@ -25,7 +27,47 @@ export default function SuggestionScreen() {
     // 4: Revealer
     // 5: Save history and update probabilities
 
+    function getSave(fileUri) {
+      return new Promise(function(resolve, reject) {
+        FileSystem.readAsStringAsync(fileUri)
+          .then((contents) => {
+            resolve(JSON.parse(contents));
+          })
+          .catch(function(error) {
+            resolve({
+              suggestionHistory: []
+            });
+          });
+      });
+    }
+
+    async function updateSave(fileUri) {
+      var save = await getSave(fileUri);
+
+      save.suggestionHistory.push(
+        {
+          player: playerInput,
+          cards: [suspectInput, weaponInput, roomInput],
+          revealer: revealerInput
+        }
+      );
+
+      FileSystem.writeAsStringAsync(fileUri, JSON.stringify(save, null, 2))
+        .then(() => {
+          console.log('Succesfully wrote to file ' + fileUri);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      
+      setSaveJson(JSON.stringify(save, null, 2));
+
+    }
+
     function handleNext() {
+      if (formStage == 4) {
+        updateSave(FileSystem.documentDirectory + 'save.json');
+      }
       setFormStage(formStage + 1);
     }
 
@@ -53,12 +95,15 @@ export default function SuggestionScreen() {
       case 5:
         return (
           <View style={styles.container}>
-            <Text>Suggestion recorded as -</Text>
-            <Text>Player: {playerInput}</Text>
-            <Text>Suspect: {suspectInput}</Text>
-            <Text>Weapon: {weaponInput}</Text>
-            <Text>Room: {roomInput}</Text>
-            <Text>Revealer: {revealerInput}</Text>
+            <ScrollView>
+              <Text>Suggestion recorded as -</Text>
+              <Text>Player: {playerInput}</Text>
+              <Text>Suspect: {suspectInput}</Text>
+              <Text>Weapon: {weaponInput}</Text>
+              <Text>Room: {roomInput}</Text>
+              <Text>Revealer: {revealerInput}</Text>
+              <Text>JSON: {saveJson}</Text>
+            </ScrollView>
           </View>
         );
     }
