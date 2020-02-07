@@ -1,76 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { AppLoading } from 'expo';
+import * as FileSystem from 'expo-file-system';
 
 import HistoryItem from '../components/HistoryItem.js';
 
 export default function HistoryScreen() {
 
-  const history = [
-    {
-        key: '8',
-        player: 'Mom',
-        cards: ['Col. Mustard', 'Candlestick', 'Ball Room'],
-        revealer: 'I'
-    },
-    {
-        key: '7',
-        player: 'Bryan',
-        cards: ['Prof. Plum', 'Poison', 'Billiard Room'],
-        revealer: 'I'
-    },
-    {
-        key: '6',
-        player: 'Joel Alexander',
-        cards: ['Miss Scarlet', 'Poison', 'Carriage House'],
-        revealer: 'Bryan'
-    },
-    {
-        key: '5',
-        player: 'I',
-        cards: ['Mrs. White', 'Revolver', 'Conservatory'],
-        revealer: 'Nobody'
-    },
-    {
-        key: '4',
-        player: 'Mom',
-        cards: ['Col. Mustard', 'Candlestick', 'Ball Room'],
-        revealer: 'Nobody'
-    },
-    {
-        key: '3',
-        player: 'Bryan',
-        cards: ['Prof. Plum', 'Poison', 'Billiard Room'],
-        revealer: 'I'
-    },
-    {
-        key: '2',
-        player: 'Joel Alexander',
-        cards: ['Miss Scarlet', 'Poison', 'Carriage House'],
-        revealer: 'Bryan'
-    },
-    {
-        key: '1',
-        player: 'I',
-        cards: ['Mrs. White', 'Revolver', 'Conservatory'],
-        revealer: 'Nobody'
-    },
-  ];
+  const [historyLoaded, setHistoryLoaded] = useState(false);
+  const [history, setHistory] = useState([]);
 
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={history}
-        renderItem={({ item }) => (
-          <HistoryItem 
-            index={item.key}
-            player={item.player}
-            cards={item.cards}
-            revealer={item.revealer}
-          />
-        )}
+  function getHistory() {
+    // Returns array of suggestionHistory from save.json
+    FileSystem.readAsStringAsync(FileSystem.documentDirectory + 'save.json')
+    .then((contents) => {
+        let json = JSON.parse(contents);
+        setHistory(addKeys(json.suggestionHistory));
+    })
+    .catch(() => {
+        console.log('error reading save.json');
+    });
+  }
+
+  function addKeys(hist) {
+    hist.forEach((item, index) => {
+      item.key = (index + 1).toString();
+    });
+    return hist.reverse();
+  }
+
+  if (historyLoaded) {
+    return (
+      <View style={styles.container}>
+        <FlatList
+          data={history}
+          renderItem={({ item }) => (
+            <HistoryItem 
+              index={item.key}
+              player={item.player}
+              cards={item.cards}
+              revealer={item.revealer}
+            />
+          )}
+        />
+      </View>
+    );
+  } else {
+    return (
+      <AppLoading 
+        startAsync={getHistory}
+        onFinish={() => setHistoryLoaded(true)}
       />
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({

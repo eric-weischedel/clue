@@ -7,18 +7,11 @@ export default function SaveScreen() {
 
     const [json, setJson] = useState('json not loaded');
 
-    function addKeys(hist) {
-      hist.forEach((item, index) => {
-        item.key = index.toString();
-      });
-      return hist.reverse();
-    }
-
     function loadJson() {
         FileSystem.readAsStringAsync(FileSystem.documentDirectory + 'save.json')
         .then((contents) => {
             let json = JSON.parse(contents);
-            setJson(JSON.stringify(addKeys(json.suggestionHistory), null, 2));
+            setJson(JSON.stringify(json, null, 2));
         })
         .catch(function(error) {
             setJson(error);
