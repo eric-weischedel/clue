@@ -19,7 +19,10 @@ const screens = {
     screen: NotesScreen
   },
   Suggestion: {
-    screen: SuggestionScreen
+    screen: SuggestionScreen,
+    navigationOptions: {
+      title: 'New Suggestion'
+    }
   },
   History: {
     screen: HistoryScreen

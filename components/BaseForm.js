@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
     },
     headerText: {
-      marginLeft: 10,
+      marginLeft: 20,
       marginVertical: 20,
       fontSize: 18
     },
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
       borderBottomColor: '#eee',
       borderBottomWidth: 1,
       borderStyle: 'solid',
-      paddingLeft: 10
+      paddingLeft: 20
     },
     radioText: {
       fontSize: 16,
