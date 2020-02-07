@@ -11,7 +11,7 @@ export default function HistoryScreen() {
   const [history, setHistory] = useState([]);
 
   function getHistory() {
-    // Returns array of suggestionHistory from save.json
+    // Returns suggestionHistory array from save.json
     FileSystem.readAsStringAsync(FileSystem.documentDirectory + 'save.json')
     .then((contents) => {
         let json = JSON.parse(contents);
@@ -23,6 +23,7 @@ export default function HistoryScreen() {
   }
 
   function addKeys(hist) {
+    // Adds keys (FlatList) and reverses (viewing order) suggestionHistory array
     hist.forEach((item, index) => {
       item.key = (index + 1).toString();
     });
