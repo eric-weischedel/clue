@@ -22,6 +22,7 @@ export default function SuggestionWeaponForm(props) {
             setInput={props.setWeaponInput}
             headerTitle='Which weapon?'
             handleNext={props.handleNext}
+            handleBack={props.handleBack}
         />
     );
     

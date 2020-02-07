@@ -19,6 +19,7 @@ export default function SuggestionRevealerForm(props) {
             setInput={props.setRevealerInput}
             headerTitle='Who revealed a card?'
             handleNext={props.handleNext}
+            handleBack={props.handleBack}
         />
     );
 

@@ -40,7 +40,7 @@ const DrawerNavigator = createDrawerNavigator(
       drawerType: 'slide',
       drawerPosition: 'right',
       overlayColor: 'none',
-      drawerLockMode: 'locked-closed'
+      drawerLockMode: 'locked-closed',
     }
   );
   

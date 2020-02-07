@@ -18,6 +18,8 @@ export default function NewGameVersionForm(props) {
             setInput={props.setVersionInput}
             headerTitle='Which version of the game?'
             handleNext={props.handleNext}
+            handleBack={props.handleBack}
+            noBack
         />
     );
 

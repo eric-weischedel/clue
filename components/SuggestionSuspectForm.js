@@ -20,6 +20,7 @@ export default function SuggestionSuspectForm(props) {
             setInput={props.setSuspectInput}
             headerTitle='Which suspect?'
             handleNext={props.handleNext}
+            handleBack={props.handleBack}
         />
     );
     

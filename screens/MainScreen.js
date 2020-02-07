@@ -15,7 +15,7 @@ export default function MainScreen({ navigation }) {
     <SafeAreaView style={{ flex: 1 }}>
       {/* Header */}
       <View style={styles.headerContainer}>
-        <Text style={ styles.headerText }>Prospects</Text>
+        <Text style={ styles.headerText }>Probabilities</Text>
         <TouchableOpacity style={ styles.menuButton } onPress={() => navigation.openDrawer()}>
           <Icon name='navicon' type='evilicon' size={28} color={Colors.primary}/>
         </TouchableOpacity>

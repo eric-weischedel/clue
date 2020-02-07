@@ -48,10 +48,20 @@ export default function BaseForm(props) {
         
             <FAB 
                 disabled={ !props.input }
-                style={ [styles.fab, {backgroundColor: props.input ? 'green' : 'gray'} ]} 
-                icon='check' 
+                style={styles.fab} 
+                visible={props.input}
+                icon='chevron-right' 
                 color='white' 
+                label='Next'
                 onPress={props.handleNext}
+            />
+            <FAB 
+                style={styles.fabBack} 
+                visible={!props.noBack}
+                icon='chevron-left' 
+                color='white' 
+                small
+                onPress={props.handleBack}
             />
         </View>
     );
@@ -89,5 +99,12 @@ const styles = StyleSheet.create({
       position: 'absolute',
       right: 20,
       bottom: 30,
+      backgroundColor: Colors.green
+    },
+    fabBack: {
+      position: 'absolute',
+      left: 20,
+      bottom: 30,
+      backgroundColor: '#777'
     }
   });

@@ -18,6 +18,8 @@ export default function SuggestionPlayerForm(props) {
             setInput={props.setPlayerInput}
             headerTitle='Whose turn is it?'
             handleNext={props.handleNext}
+            handleBack={props.handleBack}
+            noBack={true}
         />
     );
 

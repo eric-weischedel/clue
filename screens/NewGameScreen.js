@@ -21,14 +21,18 @@ export default function NewGameScreen() {
         setFormStage(formStage + 1);
     }
 
+    function handleBack() {
+        setFormStage(formStage - 1);
+    }
+
     switch (formStage) {
         case 0:
             return (
-                <NewGameVersionForm versionInput={versionInput} setVersionInput={setVersionInput} handleNext={handleNext} />
+                <NewGameVersionForm versionInput={versionInput} setVersionInput={setVersionInput} handleNext={handleNext} handleBack={handleBack} />
             );
         case 1:
             return (
-                <NewGamePlayersForm playersInput={playersInput} setPlayersInput={setPlayersInput} handleNext={handleNext} />
+                <NewGamePlayersForm playersInput={playersInput} setPlayersInput={setPlayersInput} handleNext={handleNext} handleBack={handleBack} />
             );
     }
 }

@@ -8,7 +8,7 @@ import WeaponForm from '../components/SuggestionWeaponForm.js';
 import RoomForm from '../components/SuggestionRoomForm.js';
 import RevealerForm from '../components/SuggestionRevealerForm.js';
 
-export default function SuggestionScreen() {
+export default function SuggestionScreen({ navigation }) {
 
     const [playerInput, setPlayerInput] = useState('');
     const [suspectInput, setSuspectInput] = useState('');
@@ -71,26 +71,30 @@ export default function SuggestionScreen() {
       setFormStage(formStage + 1);
     }
 
+    function handleBack() {
+      if (formStage != 0) setFormStage(formStage - 1);
+    }
+
     switch (formStage) {
       case 0:
         return (
-          <PlayerForm playerInput={playerInput} setPlayerInput={setPlayerInput} handleNext={handleNext}/>
+          <PlayerForm playerInput={playerInput} setPlayerInput={setPlayerInput} handleNext={handleNext} handleBack={handleBack} />
         );
       case 1:
         return (
-          <SuspectForm suspectInput={suspectInput} setSuspectInput={setSuspectInput} handleNext={handleNext}/>
+          <SuspectForm suspectInput={suspectInput} setSuspectInput={setSuspectInput} handleNext={handleNext} handleBack={handleBack} />
         );
       case 2:
         return (
-          <WeaponForm weaponInput={weaponInput} setWeaponInput={setWeaponInput} handleNext={handleNext}/>
+          <WeaponForm weaponInput={weaponInput} setWeaponInput={setWeaponInput} handleNext={handleNext} handleBack={handleBack} />
         );
       case 3:
         return (
-          <RoomForm roomInput={roomInput} setRoomInput={setRoomInput} handleNext={handleNext}/>
+          <RoomForm roomInput={roomInput} setRoomInput={setRoomInput} handleNext={handleNext} handleBack={handleBack} />
         );
       case 4:
         return (
-          <RevealerForm revealerInput={revealerInput} setRevealerInput={setRevealerInput} handleNext={handleNext}/>
+          <RevealerForm revealerInput={revealerInput} setRevealerInput={setRevealerInput} handleNext={handleNext} handleBack={handleBack} />
         );
       case 5:
         return (

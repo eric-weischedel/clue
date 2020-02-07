@@ -42,7 +42,7 @@ export default function SideMenu({ navigation }) {
                         color='#000'
                         size={24}
                     />
-                    <Text style={styles.navText}>Save JSON</Text>
+                    <Text style={styles.navText}>Game Saves</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('NewGame')}>
