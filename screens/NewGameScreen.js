@@ -9,6 +9,7 @@ export default function NewGameScreen() {
     const [formStage, setFormStage] = useState(0);
     const [versionInput, setVersionInput] = useState('');
     const [playersInput, setPlayersInput] = useState([]);
+    const [suspectsInput, setSuspectsInput] = useState([]);
 
     // == FORM STAGES ==
     // 0: Game Version
@@ -37,7 +38,7 @@ export default function NewGameScreen() {
             );
         case 2: 
             return (
-                <NewGameSuspectsForm />
+                <NewGameSuspectsForm suspectsInput={suspectsInput} setSuspectsInput={setSuspectsInput} handleNext={handleNext} handleBack={handleBack} />
             );
         case 3: 
             return (
