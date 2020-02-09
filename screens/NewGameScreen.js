@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import NewGameVersionForm from '../components/NewGameVersionForm.js';
 import NewGamePlayersForm from '../components/NewGamePlayersForm.js';
+import NewGameSuspectsForm from '../components/NewGameSuspectsForm.js';
 
 export default function NewGameScreen() {
     const [formStage, setFormStage] = useState(0);
@@ -33,6 +34,17 @@ export default function NewGameScreen() {
         case 1:
             return (
                 <NewGamePlayersForm playersInput={playersInput} setPlayersInput={setPlayersInput} handleNext={handleNext} handleBack={handleBack} />
+            );
+        case 2: 
+            return (
+                <NewGameSuspectsForm />
+            );
+        case 3: 
+            return (
+                <View style={styles.container}>
+                    <Text>version: {versionInput}</Text>
+                    <Text>players: {playersInput}</Text>
+                </View>
             );
     }
 }

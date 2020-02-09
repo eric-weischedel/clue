@@ -11,7 +11,7 @@ export default function NotesScreen() {
       setNotesText('');
     }
 
-    const fileName = 'test.txt';
+    const fileName = 'notes.txt';
 
     function handleWriteNotes() {
       // path: FileSystem.documentDirectory

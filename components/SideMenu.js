@@ -34,15 +34,15 @@ export default function SideMenu({ navigation }) {
                     <Text style={styles.navText}>History</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Save')}>
+                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('FileExplorer')}>
                     <Icon
                         style={styles.navIcon}
-                        name='save'
+                        name='folder'
                         type='feather'
                         color='#000'
                         size={24}
                     />
-                    <Text style={styles.navText}>Game Saves</Text>
+                    <Text style={styles.navText}>File Explorer</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('NewGame')}>

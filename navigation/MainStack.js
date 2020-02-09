@@ -5,7 +5,7 @@ import MainScreen from '../screens/MainScreen.js';
 import NotesScreen from '../screens/NotesScreen.js';
 import SuggestionScreen from '../screens/SuggestionScreen.js';
 import HistoryScreen from '../screens/HistoryScreen.js';
-import SaveScreen from '../screens/SaveScreen.js';
+import FileExplorer from '../screens/FileExplorer.js';
 import NewGameScreen from '../screens/NewGameScreen.js';
 
 const screens = {
@@ -27,8 +27,11 @@ const screens = {
   History: {
     screen: HistoryScreen
   },
-  Save: {
-    screen: SaveScreen
+  FileExplorer: {
+    screen: FileExplorer,
+    navigationOptions: {
+      title: 'File Explorer'
+    }
   },
   NewGame: {
     screen: NewGameScreen,
