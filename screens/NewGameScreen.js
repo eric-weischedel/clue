@@ -68,18 +68,12 @@ export default function NewGameScreen() {
                     <Text style={styles.header}>Players</Text>
                     <Text>{JSON.stringify(playersInput)}</Text>
 
-                    <Text style={styles.header}>Suspects</Text>
-                    <Text>{JSON.stringify(suspectsInput)}</Text>
-
-                    <Text style={styles.header}>Weapons</Text>
-                    <Text>{JSON.stringify(weaponsInput)}</Text>
-
-                    <Text style={styles.header}>Rooms</Text>
-                    <Text>{JSON.stringify(roomsInput)}</Text>
+                    <Text style={styles.header}>Cards</Text>
+                    <Text>{JSON.stringify(suspectsInput.concat(weaponsInput).concat(roomsInput), null, 2)}</Text>
 
                     <Text style={styles.header}>File name</Text>
                     <Text>{fileName}</Text>
-                    
+
                 </View>
             );
     }
