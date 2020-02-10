@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import NewGameVersionForm from '../components/NewGameVersionForm.js';
 import NewGamePlayersForm from '../components/NewGamePlayersForm.js';
 import NewGameSuspectsForm from '../components/NewGameSuspectsForm.js';
 import NewGameWeaponsForm from '../components/NewGameWeaponsForm.js';
 import NewGameRoomsForm from '../components/NewGameRoomsForm.js';
+import NewGameFilenameForm from '../components/NewGameFilenameForm.js';
 
 export default function NewGameScreen() {
     const [formStage, setFormStage] = useState(0);
@@ -14,6 +15,7 @@ export default function NewGameScreen() {
     const [suspectsInput, setSuspectsInput] = useState([]);
     const [weaponsInput, setWeaponsInput] = useState([]);
     const [roomsInput, setRoomsInput] = useState([]);
+    const [fileName, setFileName] = useState('');
 
     // == FORM STAGES ==
     // 0: Game Version
@@ -52,14 +54,32 @@ export default function NewGameScreen() {
             return (
                 <NewGameRoomsForm roomsInput={roomsInput} setRoomsInput={setRoomsInput} handleNext={handleNext} handleBack={handleBack} />
             );
-        case 5: 
+        case 5:
+            return (
+                <NewGameFilenameForm fileName={fileName} setFileName={setFileName} handleNext={handleNext} handleBack={handleBack} />
+            );
+        case 6: 
             return (
                 <View style={styles.container}>
-                    <Text>version: {versionInput}</Text>
-                    <Text>players: {JSON.stringify(playersInput)}</Text>
-                    <Text>suspects: {JSON.stringify(suspectsInput)}</Text>
-                    <Text>weapons: {JSON.stringify(weaponsInput)}</Text>
-                    <Text>rooms: {JSON.stringify(roomsInput)}</Text>
+
+                    <Text style={styles.header}>Version</Text>
+                    <Text>{versionInput}</Text>
+
+                    <Text style={styles.header}>Players</Text>
+                    <Text>{JSON.stringify(playersInput)}</Text>
+
+                    <Text style={styles.header}>Suspects</Text>
+                    <Text>{JSON.stringify(suspectsInput)}</Text>
+
+                    <Text style={styles.header}>Weapons</Text>
+                    <Text>{JSON.stringify(weaponsInput)}</Text>
+
+                    <Text style={styles.header}>Rooms</Text>
+                    <Text>{JSON.stringify(roomsInput)}</Text>
+
+                    <Text style={styles.header}>File name</Text>
+                    <Text>{fileName}</Text>
+                    
                 </View>
             );
     }
@@ -68,8 +88,10 @@ export default function NewGameScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        marginLeft: 20
     },
+    header: {
+        fontWeight: 'bold',
+        marginTop: 10
+    }
 });
