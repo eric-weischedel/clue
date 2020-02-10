@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import BaseForm from './BaseForm.js';
+
 import CheckboxForm from '../components/CheckboxForm.js';
 
-export default function SecondaryScreen() {
+export default function NewGameSuspectsForm(props) {
+
   const suspects = [
     {key: '1', name: 'Col. Mustard'},
     {key: '2', name: 'Miss White'},
@@ -14,6 +14,13 @@ export default function SecondaryScreen() {
   ];
 
   return (
-    <CheckboxForm />
+    <CheckboxForm 
+      options={suspects}
+      input={props.suspectsInput}
+      setInput={props.setSuspectsInput}
+      headerTitle='Which suspects do you have?'
+      handleNext={props.handleNext}
+      handleBack={props.handleBack}
+    />
   );
 }

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 
 import Colors from '../styles/Colors.js';
 
 export default function CheckLabel(props) {
-    const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(props.checked);
 
     function handleToggle() {
         setChecked(!checked);
@@ -13,22 +13,31 @@ export default function CheckLabel(props) {
     }
 
     return (
-        <TouchableOpacity style={styles.container} onPress={handleToggle}>
+        <TouchableOpacity style={styles.checkboxContainer} onPress={handleToggle}>
             <Checkbox 
                 status={checked ? 'checked' : 'unchecked'}
                 onPress={handleToggle}
                 color={Colors.primary}
             />
-            <Text>{props.name}</Text>
+            <Text style={styles.labelText}>{props.name}</Text>
         </TouchableOpacity>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
+    checkboxContainer: {
+        display: 'flex',
         flexDirection: 'row',
-        backgroundColor: '#fff',
         alignItems: 'center',
+        justifyContent: 'flex-start',
+        borderBottomColor: '#eee',
+        borderBottomWidth: 1,
+        borderStyle: 'solid',
+        paddingLeft: 20
     },
+    labelText: {
+        fontSize: 16,
+        paddingLeft: 30,
+        paddingVertical: 15
+    }
 });

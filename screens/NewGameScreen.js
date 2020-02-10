@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
 import NewGameVersionForm from '../components/NewGameVersionForm.js';
 import NewGamePlayersForm from '../components/NewGamePlayersForm.js';
 import NewGameSuspectsForm from '../components/NewGameSuspectsForm.js';
+import NewGameWeaponsForm from '../components/NewGameWeaponsForm.js';
+import NewGameRoomsForm from '../components/NewGameRoomsForm.js';
 
 export default function NewGameScreen() {
     const [formStage, setFormStage] = useState(0);
     const [versionInput, setVersionInput] = useState('');
     const [playersInput, setPlayersInput] = useState([]);
     const [suspectsInput, setSuspectsInput] = useState([]);
+    const [weaponsInput, setWeaponsInput] = useState([]);
+    const [roomsInput, setRoomsInput] = useState([]);
 
     // == FORM STAGES ==
     // 0: Game Version
@@ -42,9 +46,20 @@ export default function NewGameScreen() {
             );
         case 3: 
             return (
+                <NewGameWeaponsForm weaponsInput={weaponsInput} setWeaponsInput={setWeaponsInput} handleNext={handleNext} handleBack={handleBack} />
+            );
+        case 4:
+            return (
+                <NewGameRoomsForm roomsInput={roomsInput} setRoomsInput={setRoomsInput} handleNext={handleNext} handleBack={handleBack} />
+            );
+        case 5: 
+            return (
                 <View style={styles.container}>
                     <Text>version: {versionInput}</Text>
-                    <Text>players: {playersInput}</Text>
+                    <Text>players: {JSON.stringify(playersInput)}</Text>
+                    <Text>suspects: {JSON.stringify(suspectsInput)}</Text>
+                    <Text>weapons: {JSON.stringify(weaponsInput)}</Text>
+                    <Text>rooms: {JSON.stringify(roomsInput)}</Text>
                 </View>
             );
     }
