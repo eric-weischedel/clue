@@ -27,7 +27,7 @@ export default function NewGameScreen() {
     // 5: Initialize
 
     function handleInitialize(){
-        console.log('Creating save file... ');
+        console.log('Initializing new game...');
 
         let save = {
             fileName: fileName + '.json',
@@ -36,16 +36,24 @@ export default function NewGameScreen() {
             version: versionInput,
         };
 
-        console.log(JSON.stringify(save, null, 2));
-
         let uri = FileSystem.documentDirectory + 'working_save.json';
         FileSystem.writeAsStringAsync(uri, JSON.stringify(save, null, 2))
             .then(() => {
-                console.log('Success');
+                console.log('Success writing to working save');
+                FileSystem.copyAsync({ 
+                    from: uri, 
+                    to: FileSystem.documentDirectory + fileName + '.json' 
+                })
+                .then(() => {
+                    console.log('Success copying working save');
+                })
+                .catch((error) => {
+                    console.log('Error copying working save to ' + fileName);
+                })
             })
             .catch((error) => {
                 console.log(error);
-                console.log('Failure');
+                console.log('Error writing to working save');
             });
     }
 

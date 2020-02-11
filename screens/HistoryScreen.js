@@ -5,7 +5,6 @@ import * as FileSystem from 'expo-file-system';
 import { Button } from 'react-native-paper';
 
 import HistoryItem from '../components/HistoryItem.js';
-import Colors from '../styles/Colors.js';
 
 export default function HistoryScreen({ navigation }) {
 
@@ -14,13 +13,13 @@ export default function HistoryScreen({ navigation }) {
 
   function getHistory() {
     // Returns suggestionHistory array from save.json
-    FileSystem.readAsStringAsync(FileSystem.documentDirectory + 'save.json')
+    FileSystem.readAsStringAsync(FileSystem.documentDirectory + 'working_save.json')
     .then((contents) => {
         let json = JSON.parse(contents);
         setHistory(addKeys(json.suggestionHistory));
     })
     .catch(() => {
-        console.log('error reading save.json');
+        console.log('error reading working save');
     });
   }
 

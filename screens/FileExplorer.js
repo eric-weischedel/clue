@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity, ScrollView } from 'react-native';
-import { Button } from 'react-native-paper';
 import * as FileSystem from 'expo-file-system';
 
 export default function FileExplorer() {

@@ -9,12 +9,12 @@ import RoomsTab from '../components/RoomsTab.js';
 import Colors from '../styles/Colors.js';
 
 const TabNavigator = createMaterialTopTabNavigator({
-    Suspects: { 
+    Suspect: { 
         screen: SuspectsTab,
         navigationOptions: {
           tabBarIcon: ({tintColor}) => (
             <Icon
-              name='users'
+              name='user'
               type='feather'
               color={tintColor}
               size={18}
@@ -22,7 +22,7 @@ const TabNavigator = createMaterialTopTabNavigator({
           )
         }
     },
-    Weapons: { 
+    Weapon: { 
         screen: WeaponsTab,
         navigationOptions: {
           tabBarIcon: ({tintColor}) => (
@@ -35,7 +35,7 @@ const TabNavigator = createMaterialTopTabNavigator({
           )
         }
     },
-    Rooms: { 
+    Room: { 
         screen: RoomsTab,
         navigationOptions: {
           tabBarIcon: ({tintColor}) => (

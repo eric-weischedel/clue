@@ -66,7 +66,7 @@ export default function SuggestionScreen({ navigation }) {
 
     function handleNext() {
       if (formStage == 4) {
-        updateSave(FileSystem.documentDirectory + 'save.json');
+        updateSave(FileSystem.documentDirectory + 'working_save.json');
       }
       setFormStage(formStage + 1);
     }

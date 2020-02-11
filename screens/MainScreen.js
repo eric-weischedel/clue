@@ -26,7 +26,7 @@ export default function MainScreen({ navigation }) {
       <FAB 
         style={styles.fab} 
         color='white'
-        icon='lightbulb-on' 
+        icon='chat-alert'
         onPress={() => navigation.push('Suggestion')} 
       />
     </SafeAreaView>
