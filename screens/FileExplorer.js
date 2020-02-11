@@ -73,7 +73,7 @@ export default function FileExplorer() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'flex-start',
     backgroundColor: '#fff',
   },
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   fileItem: {
-    padding: 30,
+    paddingVertical: 18,
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomColor: '#ddd',
@@ -91,6 +91,6 @@ const styles = StyleSheet.create({
     borderStyle: 'solid'
   },
   fileItemText: {
-    fontSize: 18
+    fontSize: 14
   }
 });

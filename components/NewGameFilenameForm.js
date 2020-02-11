@@ -13,11 +13,13 @@ export default function NewGameFilenameForm(props) {
             <TextInput 
                 style={styles.textInput}
                 placeholder='Type a file name...'
+                value={props.fileName}
                 onChangeText={(text) => props.setFileName(text)}
             />
 
             <FAB 
                 style={styles.fab} 
+                visible={props.fileName}
                 icon='chevron-right' 
                 color='white' 
                 label='Next'
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#ccc',
         borderBottomWidth: 1,
         fontSize: 16,
-        borderStyle: 'solid'
+        borderStyle: 'solid',
     },
     fab: {
         position: 'absolute',

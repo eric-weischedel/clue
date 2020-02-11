@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import * as FileSystem from 'expo-file-system';
 
 import NewGameVersionForm from '../components/NewGameVersionForm.js';
 import NewGamePlayersForm from '../components/NewGamePlayersForm.js';
@@ -24,6 +25,29 @@ export default function NewGameScreen() {
     // 3: Weapons
     // 4: Rooms
     // 5: Initialize
+
+    function handleInitialize(){
+        console.log('Creating save file... ');
+
+        let save = {
+            fileName: fileName + '.json',
+            myCards: suspectsInput.concat(weaponsInput).concat(roomsInput),
+            suggestionHistory: [],
+            version: versionInput,
+        };
+
+        console.log(JSON.stringify(save, null, 2));
+
+        let uri = FileSystem.documentDirectory + 'working_save.json';
+        FileSystem.writeAsStringAsync(uri, JSON.stringify(save, null, 2))
+            .then(() => {
+                console.log('Success');
+            })
+            .catch((error) => {
+                console.log(error);
+                console.log('Failure');
+            });
+    }
 
     function handleNext() {
         setFormStage(formStage + 1);
@@ -59,6 +83,7 @@ export default function NewGameScreen() {
                 <NewGameFilenameForm fileName={fileName} setFileName={setFileName} handleNext={handleNext} handleBack={handleBack} />
             );
         case 6: 
+            handleInitialize();
             return (
                 <View style={styles.container}>
 
