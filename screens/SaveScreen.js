@@ -40,7 +40,7 @@ export default function SaveScreen() {
             key: index.toString(),
             name: value
           }
-        )).filter(value => value.name != 'working_save.json');
+        )).filter(value => value.name != 'working_save.json' && value.name != 'notes.txt');
         console.log(foo);
         setFiles(foo);
         getSelected();
