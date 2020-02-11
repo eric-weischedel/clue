@@ -5,7 +5,7 @@ import * as FileSystem from 'expo-file-system';
 import BaseForm from '../components/BaseForm.js';
 import Colors from '../styles/Colors.js';
 
-export default function SaveScreen() {
+export default function SaveScreen(props) {
   
   const [selected, setSelected] = useState('');
   const [current, setCurrent] = useState('');
@@ -66,6 +66,7 @@ export default function SaveScreen() {
         })
           .then(() => {
             console.log('success copying switched save to working save');
+            props.navigation.pop();
           })
           .catch(() => {
             console.log('error copying switched save to working save');

@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity, ScrollView } from 'react-native';
 import * as FileSystem from 'expo-file-system';
+import { Button } from 'react-native-paper';
 
 export default function FileExplorer() {
 
     const [files, setFiles] = useState([null]);
+    const [selected, setSelected] = useState('');
     const [filesLoaded, setFilesLoaded] = useState(false);
     const [fileText, setFileText] = useState('No file selected.');
+
+    function handleDelete() {
+      console.log('deleting ' + selected);
+
+      let uri = FileSystem.documentDirectory + selected;
+      FileSystem.deleteAsync(uri)
+        .then(() => {
+          console.log('delete successful');
+        })
+        .catch(() => {
+          console.log('error deleting');
+        })
+    }
 
     function loadDir() {
       FileSystem.readDirectoryAsync(FileSystem.documentDirectory)
@@ -31,6 +46,7 @@ export default function FileExplorer() {
       FileSystem.readAsStringAsync(uri)
         .then((contents) => {
           setFileText(contents);
+          setSelected(fileName);
         })
         .catch((error) => {
           console.log(error);
@@ -55,6 +71,7 @@ export default function FileExplorer() {
             <Text style={styles.headerText}>Contents</Text>
             <ScrollView>
               <Text>{fileText}</Text>
+              <Button mode='contained' onPress={handleDelete}>Delete</Button>
             </ScrollView>
           </View>
         </View>
@@ -72,7 +89,7 @@ export default function FileExplorer() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: 'flex-start',
     backgroundColor: '#fff',
   },
