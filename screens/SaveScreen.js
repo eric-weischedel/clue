@@ -8,6 +8,7 @@ import Colors from '../styles/Colors.js';
 export default function SaveScreen() {
   
   const [selected, setSelected] = useState('');
+  const [current, setCurrent] = useState('');
   const [filesLoaded, setFilesLoaded] = useState(false);
   const [files, setFiles] = useState([null]);
 
@@ -19,6 +20,7 @@ export default function SaveScreen() {
       .then((contents) => {
         let foo = JSON.parse(contents);
         setSelected(foo.fileName);
+        setCurrent(foo.fileName);
         setFilesLoaded(true);
         console.log('success reading working save');
       })
@@ -49,7 +51,30 @@ export default function SaveScreen() {
   }
 
   function handleSelect() {
-    console.log('next handled successfully');
+    console.log('Switching games...');
+
+    let uri = FileSystem.documentDirectory;
+    FileSystem.copyAsync({ 
+      from: uri + 'working_save.json', 
+      to: uri + current
+    })
+      .then(() => {
+        console.log('success copying working save to current game');
+        FileSystem.copyAsync({
+          from: uri + selected,
+          to: uri + 'working_save.json'
+        })
+          .then(() => {
+            console.log('success copying switched save to working save');
+          })
+          .catch(() => {
+            console.log('error copying switched save to working save');
+          })
+      })
+      .catch(() => {
+        console.log('error copying game to working save');
+      });
+
   }
 
   if (filesLoaded) {
