@@ -82,9 +82,10 @@ const styles = StyleSheet.create({
     },
     menuHeaderText: {
         fontSize: 18,
-        color: '#000',
+        color: '#777',
         marginLeft: 20,
         marginVertical: 20,
+        fontFamily: 'raleway-bold'
     },
     navItem: {
         display: 'flex',
@@ -102,5 +103,6 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         fontSize: 16,
         color: '#000',
+        fontFamily: 'raleway-medium'
     }
 });

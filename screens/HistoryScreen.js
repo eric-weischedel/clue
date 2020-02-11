@@ -80,13 +80,13 @@ const styles = StyleSheet.create({
     margin: 30
   },
   messageTitle: {
-    fontFamily: 'poppins-medium',
+    fontFamily: 'raleway-medium',
     fontSize: 18,
     lineHeight: 50,
     color: '#777'
   },
   messageText: {
-    fontFamily: 'poppins-regular',
+    fontFamily: 'raleway-regular',
     fontSize: 14,
     lineHeight: 24,
     color: '#333333'

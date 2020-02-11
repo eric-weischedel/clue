@@ -19,7 +19,7 @@ export default function Tab(props) {
             <View style={styles.percentageContainer}>
               <Text style={styles.probabilityText}>{item.probability}%</Text>
               <ProgressCircle 
-                style={{ height: 25, width: 25 }} 
+                style={{ height: 30, width: 30 }} 
                 strokeWidth={5} 
                 progress={item.probability / 100} 
                 progressColor={Colors.secondary}
@@ -41,10 +41,10 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     paddingHorizontal: 20,
-    paddingVertical: 15,
+    paddingVertical: 24,
     flex: 1,
     flexDirection: 'row',
-    alignContent: 'center',
+    alignItems: 'center',
     justifyContent: 'space-between',
     borderBottomColor: '#eee',
     borderBottomWidth: 1,
@@ -53,15 +53,17 @@ const styles = StyleSheet.create({
   percentageContainer: {
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 10
   },
   cardText: {
     fontSize: 16,
-    fontFamily: 'poppins-regular',
+    fontFamily: 'raleway-medium',
     color: 'black'
   },
   probabilityText: {
     fontSize: 16,
-    fontFamily: 'poppins-regular',
+    fontFamily: 'raleway-regular',
     color: 'black',
     marginRight: 10
   }

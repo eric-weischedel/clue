@@ -12,13 +12,19 @@ export default function MainScreen({ navigation }) {
   const cards = getCards();
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       {/* Header */}
       <View style={styles.headerContainer}>
-        <Text style={ styles.headerText }>Probabilities</Text>
-        <TouchableOpacity style={ styles.menuButton } onPress={() => navigation.openDrawer()}>
-          <Icon name='navicon' type='evilicon' size={28} color={Colors.primary}/>
-        </TouchableOpacity>
+        <View style={styles.titleContainer}>
+          <Text style={ styles.headerText }>Probabilities</Text>
+          <TouchableOpacity style={ styles.menuButton } onPress={() => navigation.openDrawer()}>
+            <Icon name='navicon' type='evilicon' size={32} color={Colors.primary}/>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.subheaderContainer}>
+          <Text style={styles.subheader}>NAME</Text>
+          <Text style={[styles.subheader, { marginRight: 50 }]}>CHANCE</Text>
+        </View>
       </View>
       {/* Tabs */}
       <TabNavigator screenProps={ cards } />
@@ -26,7 +32,7 @@ export default function MainScreen({ navigation }) {
       <FAB 
         style={styles.fab} 
         color='white'
-        icon='chat-alert'
+        icon='lightbulb-on'
         onPress={() => navigation.push('Suggestion')} 
       />
     </SafeAreaView>
@@ -41,22 +47,37 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary
   },
   headerText: {
-    fontSize: 20,
+    fontSize: 26,
     marginLeft: 20,
-    color: 'black',
-    fontFamily: 'poppins-medium',
+    color: '#777',
+    fontFamily: 'raleway-bold',
   },
   menuButton: {
     padding: 20,
   },
-  headerContainer: {
+  titleContainer: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'white',
+    marginTop: 15,
+    paddingBottom: 12
+  },
+  headerContainer: {
     borderBottomWidth: 1,
     borderBottomColor: 'lightgray',
-    borderStyle: 'solid'
+    borderStyle: 'solid',
+  },
+  subheaderContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  subheader: {
+    marginLeft: 20,
+    fontFamily: 'raleway-light',
+    fontSize: 12,
+    marginBottom: 8
   }
 });
