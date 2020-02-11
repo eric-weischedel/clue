@@ -21,6 +21,7 @@ export default function NewGameWeaponsForm(props) {
             input={props.weaponsInput}
             setInput={props.setWeaponsInput}
             headerTitle='Which weapons do you have?'
+            nextText='Rooms'
             handleNext={props.handleNext}
             handleBack={props.handleBack}
         />

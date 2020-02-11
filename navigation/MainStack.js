@@ -7,6 +7,7 @@ import SuggestionScreen from '../screens/SuggestionScreen.js';
 import HistoryScreen from '../screens/HistoryScreen.js';
 import FileExplorer from '../screens/FileExplorer.js';
 import NewGameScreen from '../screens/NewGameScreen.js';
+import SaveScreen from '../screens/SaveScreen.js';
 
 const screens = {
   Main: {
@@ -37,6 +38,12 @@ const screens = {
     screen: NewGameScreen,
     navigationOptions: {
       title: 'New Game'
+    }
+  },
+  Save: {
+    screen: SaveScreen,
+    navigationOptions: {
+      title: 'Saved Games'
     }
   }
 };

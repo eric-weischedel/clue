@@ -22,7 +22,7 @@ export default function NewGameFilenameForm(props) {
                 visible={props.fileName}
                 icon='chevron-right' 
                 color='white' 
-                label='Next'
+                label='Create'
                 onPress={props.handleNext}
             />
             <FAB 

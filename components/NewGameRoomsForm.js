@@ -17,6 +17,7 @@ export default function NewGameRoomsForm(props) {
             input={props.roomsInput}
             setInput={props.setRoomsInput}
             headerTitle='Which rooms do you have?'
+            nextText='Name'
             handleNext={props.handleNext}
             handleBack={props.handleBack}
         />

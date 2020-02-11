@@ -9,29 +9,12 @@ import HistoryScreen from '../screens/HistoryScreen.js';
 import SideMenu from '../components/SideMenu.js';
 import FileExplorer from '../screens/FileExplorer.js';
 import NewGameScreen from '../screens/NewGameScreen.js';
+import SaveScreen from '../screens/SaveScreen.js';
 
 const DrawerNavigator = createDrawerNavigator(
     {
       Main: {
         screen: MainStack
-      },
-      Notes: {
-        screen: NotesScreen
-      },
-      Suggestion: {
-        screen: SuggestionScreen
-      },
-      History: {
-        screen: HistoryScreen
-      },
-      FileExplorer: {
-        screen: FileExplorer
-      },
-      NewGame: {
-        screen: NewGameScreen
-      },
-      Secondary: {
-        screen: SecondaryScreen
       }
     },
     {

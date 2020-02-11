@@ -1,7 +1,5 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
-import { NavigationActions } from 'react-navigation';
-import { DrawerItems } from 'react-navigation-drawer';
 import { Icon } from 'react-native-elements'
 
 export default function SideMenu({ navigation }) {
@@ -31,7 +29,29 @@ export default function SideMenu({ navigation }) {
                         color='#000'
                         size={24}
                     />
-                    <Text style={styles.navText}>History</Text>
+                    <Text style={styles.navText}>Turn History</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Save')}>
+                    <Icon
+                        style={styles.navIcon}
+                        name='hard-drive'
+                        type='feather'
+                        color='#000'
+                        size={24}
+                    />
+                    <Text style={styles.navText}>Saved Games</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('NewGame')}>
+                    <Icon
+                        style={styles.navIcon}
+                        name='plus'
+                        type='feather'
+                        color='#000'
+                        size={24}
+                    />
+                    <Text style={styles.navText}>New Game</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('FileExplorer')}>
@@ -43,17 +63,6 @@ export default function SideMenu({ navigation }) {
                         size={24}
                     />
                     <Text style={styles.navText}>File Explorer</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('NewGame')}>
-                    <Icon
-                        style={styles.navIcon}
-                        name='plus-circle'
-                        type='feather'
-                        color='#000'
-                        size={24}
-                    />
-                    <Text style={styles.navText}>New Game</Text>
                 </TouchableOpacity>
 
             </SafeAreaView>

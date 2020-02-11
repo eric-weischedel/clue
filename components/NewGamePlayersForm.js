@@ -50,7 +50,7 @@ export default function NewGamePlayersForm(props) {
             style={styles.fab} 
             icon='chevron-right' 
             color='white' 
-            label='Next'
+            label='Suspects'
             onPress={props.handleNext}
         />
         <FAB 

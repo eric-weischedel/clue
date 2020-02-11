@@ -17,6 +17,7 @@ export default function SuggestionRoomForm(props) {
             input={props.roomInput}
             setInput={props.setRoomInput}
             headerTitle='Which room?'
+            nextText='Revealer'
             handleNext={props.handleNext}
             handleBack={props.handleBack}
         />

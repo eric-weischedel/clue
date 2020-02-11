@@ -17,6 +17,7 @@ export default function SuggestionPlayerForm(props) {
             input={props.playerInput}
             setInput={props.setPlayerInput}
             headerTitle='Whose turn is it?'
+            nextText='Suspect'
             handleNext={props.handleNext}
             handleBack={props.handleBack}
             noBack={true}

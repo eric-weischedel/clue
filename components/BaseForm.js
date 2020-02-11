@@ -21,7 +21,14 @@ export default function BaseForm(props) {
 
     // props.headerTitle = 'Which suspect?'
 
+    // props.nextText = 'Next'
+
     // props.handleNext = increment stage...
+
+    // props.noBack = no back button
+
+    // props.handleBack = decrement stage
+    
 
     return (
         <View style={styles.container}>
@@ -52,7 +59,7 @@ export default function BaseForm(props) {
                 visible={props.input}
                 icon='chevron-right' 
                 color='white' 
-                label='Next'
+                label={props.nextText}
                 onPress={props.handleNext}
             />
             <FAB 

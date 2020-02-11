@@ -17,6 +17,7 @@ export default function NewGameVersionForm(props) {
             input={props.versionInput}
             setInput={props.setVersionInput}
             headerTitle='Which version of the game?'
+            nextText='Players'
             handleNext={props.handleNext}
             handleBack={props.handleBack}
             noBack

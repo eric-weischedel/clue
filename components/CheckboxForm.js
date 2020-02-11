@@ -35,7 +35,7 @@ export default function CheckboxForm(props) {
                 style={styles.fab} 
                 icon='chevron-right' 
                 color='white' 
-                label='Next'
+                label={props.nextText}
                 onPress={props.handleNext}
             />
             <FAB 

@@ -19,6 +19,7 @@ export default function NewGameSuspectsForm(props) {
       input={props.suspectsInput}
       setInput={props.setSuspectsInput}
       headerTitle='Which suspects do you have?'
+      nextText='Weapons'
       handleNext={props.handleNext}
       handleBack={props.handleBack}
     />
