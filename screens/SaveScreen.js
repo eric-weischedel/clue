@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
-import * as FileSystem from 'expo-file-system';
+import * as FS from 'expo-file-system';
 
 import BaseForm from '../components/BaseForm.js';
 import Colors from '../styles/Colors.js';
@@ -12,57 +12,67 @@ export default function SaveScreen(props) {
   const [files, setFiles] = useState([null]);
 
   function getSelected() {
-    console.log('Getting selected game...');
+    console.log('Reading appState to get selected game...');
 
-    // Read appState and get workingSave
-    let uri = FileSystem.documentDirectory + 'appState.json';
-    FileSystem.readAsStringAsync(uri)
+    let msgSuccess = 'Success reading appState.';
+    let msgFailure = 'Error reading appState.';
+    let uri = FS.documentDirectory + 'appState.json';
+    FS.readAsStringAsync(uri)
       .then((contents) => {
-        let foo = JSON.parse(contents);
-        setSelected(foo.workingSave);
+        let appState = JSON.parse(contents);
+        setSelected(appState.workingSave);
         setFilesLoaded(true);
-        console.log('Success reading appstate to get working save.');
+        console.log(msgSuccess);
       })
-      .catch((error) => {
-        console.log(error);
-        console.log('Error reading appState to get working save.');
-      })
+      .catch(() => {
+        console.log(msgFailure);
+      });
   }
 
   function loadDir() {
-    FileSystem.readDirectoryAsync(FileSystem.documentDirectory)
+    console.log('Reading document directory...');
+
+    let msgSuccess = 'Successfully read document directory.';
+    let msgFailure = 'Error reading document directory.';
+    let uri = FS.documentDirectory;
+    FS.readDirectoryAsync(uri)
       .then((contents) => {
-        let foo = contents.map((value, index) => (
-          {
-            key: index.toString(),
-            name: value
-          }
-        )).filter(value => value.name != 'notes.txt');
-        console.log(foo);
-        setFiles(foo);
+        // Add keys for FlatList and remove non-game files
+        let files = contents
+          .map((value, index) => (
+              {
+                key: index.toString(),
+                name: value
+              }
+            )
+          )
+          .filter(value => value.name != 'notes.txt' && value.name != 'appState.json');
+        setFiles(files);
         getSelected();
+        console.log(msgSuccess);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        console.log(msgFailure);
       });
   }
 
   function handleSelect() {
-    console.log('Switching games...');
+    console.log(`Switching games to "${selected}"...`);
 
-    // Change working save in appState.json
-    let uri = FileSystem.documentDirectory + 'appState.json';
+    let msgSuccess = 'Successfully wrote to appState.';
+    let msgFailure = 'Error writing to appState';
+    let uri = FS.documentDirectory + 'appState.json';
 
     // Todo: read appState and update workingSave instead of replacing entire file
     // In the future when we add other things in appState, this won't work.
     let contents = JSON.stringify({ workingSave: selected }, null, 2);
-    FileSystem.writeAsStringAsync(uri, contents)
+    FS.writeAsStringAsync(uri, contents)
       .then(() => {
-        console.log('Successfully wrote to appState.');
+        console.log(msgSuccess);
         props.navigation.pop();
       })
-      .catch((error) => {
-        console.log('Error writing to appState.');
+      .catch(() => {
+        console.log(msgFailure);
       });
   }
 

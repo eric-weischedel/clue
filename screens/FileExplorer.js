@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity, ScrollView } from 'react-native';
-import * as FileSystem from 'expo-file-system';
+import * as FS from 'expo-file-system';
 import { Button } from 'react-native-paper';
 
 export default function FileExplorer() {
@@ -11,45 +11,57 @@ export default function FileExplorer() {
     const [fileText, setFileText] = useState('No file selected.');
 
     function handleDelete() {
-      console.log('deleting ' + selected);
+      console.log(`Deleting file ${selected}...`);
 
-      let uri = FileSystem.documentDirectory + selected;
-      FileSystem.deleteAsync(uri)
+      let msgSuccess = 'Delete successful.';
+      let msgFailure = 'Error deleting.';
+      let uri = FS.documentDirectory + selected;
+      FS.deleteAsync(uri)
         .then(() => {
-          console.log('delete successful');
+          console.log(msgSuccess);
         })
         .catch(() => {
-          console.log('error deleting');
+          console.log(msgFailure);
         })
     }
 
     function loadDir() {
-      FileSystem.readDirectoryAsync(FileSystem.documentDirectory)
+      console.log('Reading document directory...');
+
+      let msgSuccess = 'Successfully read document directory.';
+      let msgFailure = 'Error reading document directory.';
+      let uri = FS.documentDirectory;
+      FS.readDirectoryAsync(uri)
         .then((contents) => {
-          let foo = contents.map((value, index) => (
+          let filesList = contents.map((value, index) => (
             {
               key: index.toString(),
               value: value
             }
           ));
-          console.log(foo);
-          setFiles(foo);
+          setFiles(filesList);
           setFilesLoaded(true);
+          console.log(msgSuccess);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
+          console.log(msgFailure);
         });
     }
 
     function handleItemPress(fileName) {
-      let uri = FileSystem.documentDirectory + fileName;
-      FileSystem.readAsStringAsync(uri)
+      console.log(`Reading file "${fileName}" to display...`)
+
+      let msgSuccess = 'Success reading file.';
+      let msgFailure = 'Failure reading file.';
+      let uri = FS.documentDirectory + fileName;
+      FS.readAsStringAsync(uri)
         .then((contents) => {
           setFileText(contents);
           setSelected(fileName);
+          console.log(msgSuccess);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
+          console.log(msgFailure);
         });
     }
 

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, FlatList } from 'react-native';
-import { AppLoading } from 'expo';
-import * as FileSystem from 'expo-file-system';
+import { StyleSheet, View, Text, FlatList, ActivityIndicator } from 'react-native';
+import * as FS from 'expo-file-system';
 import { Button } from 'react-native-paper';
 
 import HistoryItem from '../components/HistoryItem.js';
+import Colors from '../styles/Colors.js';
 
 export default function HistoryScreen({ navigation }) {
 
@@ -12,32 +12,41 @@ export default function HistoryScreen({ navigation }) {
   const [history, setHistory] = useState([]);
 
   function getHistory() {
-    // First, get the workingSave from appState. Then, retrieve that file.
+    console.log('Reading appState to get working save...');
 
-    let dir = FileSystem.documentDirectory;
-    FileSystem.readAsStringAsync(dir + 'appState.json')
+    let msgSuccess = 'Success reading appState.';
+    let msgFailure = 'Error reading appState.';
+    let uri = FS.documentDirectory + 'appState.json';
+    FS.readAsStringAsync(uri)
       .then((contents) => {
-        console.log('Successfully read appState to retrieve workingSave.');
-        let foo = JSON.parse(contents);
-        let fileName = foo.workingSave;
-        FileSystem.readAsStringAsync(dir + fileName)
-          .then((contents) => {
-            console.log('Successfully read' + fileName);
-            let foo = JSON.parse(contents);
-            setHistory(addKeys(foo.suggestionHistory));
-          })
-          .catch((error) => {
-            console.log('Error reading save json');
-          });
-      })
-      .catch((error) => {
-        console.log('Error reading appState to retrieve workingSave');
-      });
+        let appState = JSON.parse(contents);
+        let workingSave = appState.workingSave;
+        console.log(msgSuccess);
 
+        console.log(`Reading file "${workingSave}" for suggestion history...`)
+
+        let msgSuccess2 = `Success reading file "${workingSave}".`;
+        let msgFailure2 = `Error reading file "${workingSave}".`;
+        uri = FS.documentDirectory + workingSave;
+        FS.readAsStringAsync(uri)
+          .then((contents) => {
+            let save = JSON.parse(contents);
+            setHistory(addKeys(save.suggestionHistory));
+            setHistoryLoaded(true);
+            console.log(msgSuccess2);
+          })
+          .catch(() => {
+            console.log(msgFailure2);
+          });
+
+      })
+      .catch(() => {
+        console.log(msgFailure);
+      });
   }
 
   function addKeys(hist) {
-    // Adds keys (FlatList) and reverses (viewing order) suggestionHistory array
+    // Adds keys (for FlatList) and reverses suggestionHistory array (for proper viewing order)
     hist.forEach((item, index) => {
       item.key = (index + 1).toString();
     });
@@ -75,11 +84,11 @@ export default function HistoryScreen({ navigation }) {
       );
     }
   } else {
+    getHistory();
     return (
-      <AppLoading 
-        startAsync={getHistory}
-        onFinish={() => setHistoryLoaded(true)}
-      />
+      <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+        <ActivityIndicator size='large' color={Colors.secondary} />
+      </View>
     );
   }
 }
