@@ -23,7 +23,7 @@ export default function MainScreen({ navigation }) {
         </View>
         <View style={styles.subheaderContainer}>
           <Text style={styles.subheader}>NAME</Text>
-          <Text style={[styles.subheader, { marginRight: 50 }]}>CHANCE</Text>
+          <Text style={[styles.subheader, { marginRight: 55 }]}>CHANCE</Text>
         </View>
       </View>
       {/* Tabs */}
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     borderBottomWidth: 1,
-    borderBottomColor: 'lightgray',
+    borderBottomColor: '#ddd',
     borderStyle: 'solid',
   },
   subheaderContainer: {
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   },
   subheader: {
     marginLeft: 20,
-    fontFamily: 'raleway-light',
+    fontFamily: 'raleway-regular',
     fontSize: 12,
     marginBottom: 8
   }

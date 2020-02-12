@@ -30,30 +30,32 @@ export default function NewGameScreen() {
         console.log('Initializing new game...');
 
         let save = {
-            fileName: fileName + '.json',
             myCards: suspectsInput.concat(weaponsInput).concat(roomsInput),
             suggestionHistory: [],
             version: versionInput,
         };
 
-        let uri = FileSystem.documentDirectory + 'working_save.json';
+        let uri = FileSystem.documentDirectory + fileName + '.json';
         FileSystem.writeAsStringAsync(uri, JSON.stringify(save, null, 2))
             .then(() => {
-                console.log('Success writing to working save');
-                FileSystem.copyAsync({ 
-                    from: uri, 
-                    to: FileSystem.documentDirectory + fileName + '.json' 
-                })
+                console.log('Success creating new save file.');
+                // Change working save in appState.json
+                let uri = FileSystem.documentDirectory + 'appState.json';
+
+                // Todo: read appState and update workingSave instead of replacing entire file
+                // In the future when we add other things in appState, this won't work.
+                let contents = JSON.stringify({ workingSave: fileName + '.json'}, null, 2);
+                FileSystem.writeAsStringAsync(uri, contents)
                 .then(() => {
-                    console.log('Success copying working save');
+                    console.log('Successfully wrote to appState.');
                 })
                 .catch((error) => {
-                    console.log('Error copying working save to ' + fileName);
-                })
+                    console.log('Error writing to appState.');
+                });
             })
             .catch((error) => {
                 console.log(error);
-                console.log('Error writing to working save');
+                console.log('Error creating new save file.');
             });
     }
 

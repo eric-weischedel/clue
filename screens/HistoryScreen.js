@@ -12,15 +12,28 @@ export default function HistoryScreen({ navigation }) {
   const [history, setHistory] = useState([]);
 
   function getHistory() {
-    // Returns suggestionHistory array from save.json
-    FileSystem.readAsStringAsync(FileSystem.documentDirectory + 'working_save.json')
-    .then((contents) => {
-        let json = JSON.parse(contents);
-        setHistory(addKeys(json.suggestionHistory));
-    })
-    .catch(() => {
-        console.log('error reading working save');
-    });
+    // First, get the workingSave from appState. Then, retrieve that file.
+
+    let dir = FileSystem.documentDirectory;
+    FileSystem.readAsStringAsync(dir + 'appState.json')
+      .then((contents) => {
+        console.log('Successfully read appState to retrieve workingSave.');
+        let foo = JSON.parse(contents);
+        let fileName = foo.workingSave;
+        FileSystem.readAsStringAsync(dir + fileName)
+          .then((contents) => {
+            console.log('Successfully read' + fileName);
+            let foo = JSON.parse(contents);
+            setHistory(addKeys(foo.suggestionHistory));
+          })
+          .catch((error) => {
+            console.log('Error reading save json');
+          });
+      })
+      .catch((error) => {
+        console.log('Error reading appState to retrieve workingSave');
+      });
+
   }
 
   function addKeys(hist) {

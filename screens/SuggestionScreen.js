@@ -27,46 +27,48 @@ export default function SuggestionScreen({ navigation }) {
     // 4: Revealer
     // 5: Save history and update probabilities
 
-    function getSave(fileUri) {
-      return new Promise(function(resolve, reject) {
-        FileSystem.readAsStringAsync(fileUri)
-          .then((contents) => {
-            resolve(JSON.parse(contents));
-          })
-          .catch(function(error) {
-            resolve({
-              suggestionHistory: []
+    
+    function updateSave() {
+      // 1. Get working save 2. Read working save 3. Update working save
+
+      let dir = FileSystem.documentDirectory;
+      FileSystem.readAsStringAsync(dir + 'appState.json')
+        .then((contents) => {
+          console.log('Successfully read appState to retrieve workingSave.');
+          let foo = JSON.parse(contents);
+          let fileName = foo.workingSave;
+          FileSystem.readAsStringAsync(dir + fileName)
+            .then((contents) => {
+              console.log('Successfully read save file.');
+              let foo = JSON.parse(contents);
+              foo.suggestionHistory.push(
+                {
+                  player: playerInput,
+                  cards: [suspectInput, weaponInput, roomInput],
+                  revealer: revealerInput
+                }
+              );
+              FileSystem.writeAsStringAsync(dir + fileName, JSON.stringify(foo, null, 2))
+                .then(() => {
+                  console.log('Successfully wrote to save file.');
+                  setSaveJson(JSON.stringify(foo, null, 2));
+                })
+                .catch((error) => {
+                  console.log('Error writing to save file.');
+                });
+            })
+            .catch((error) => {
+              console.log('Error reading save file.');
             });
-          });
-      });
-    }
-
-    async function updateSave(fileUri) {
-      var save = await getSave(fileUri);
-
-      save.suggestionHistory.push(
-        {
-          player: playerInput,
-          cards: [suspectInput, weaponInput, roomInput],
-          revealer: revealerInput
-        }
-      );
-
-      FileSystem.writeAsStringAsync(fileUri, JSON.stringify(save, null, 2))
-        .then(() => {
-          console.log('Succesfully wrote to file ' + fileUri);
         })
         .catch((error) => {
-          console.log(error);
+          console.log('Error reading appState to retrieve workingSave');
         });
-      
-      setSaveJson(JSON.stringify(save, null, 2));
-
     }
 
     function handleNext() {
       if (formStage == 4) {
-        updateSave(FileSystem.documentDirectory + 'working_save.json');
+        updateSave();
       }
       setFormStage(formStage + 1);
     }

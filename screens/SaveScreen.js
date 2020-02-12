@@ -8,29 +8,26 @@ import Colors from '../styles/Colors.js';
 export default function SaveScreen(props) {
   
   const [selected, setSelected] = useState('');
-  const [current, setCurrent] = useState('');
   const [filesLoaded, setFilesLoaded] = useState(false);
   const [files, setFiles] = useState([null]);
 
   function getSelected() {
-    // Read working_save and get fileName
+    console.log('Getting selected game...');
 
-    let uri = FileSystem.documentDirectory + 'working_save.json';
+    // Read appState and get workingSave
+    let uri = FileSystem.documentDirectory + 'appState.json';
     FileSystem.readAsStringAsync(uri)
       .then((contents) => {
         let foo = JSON.parse(contents);
-        setSelected(foo.fileName);
-        setCurrent(foo.fileName);
+        setSelected(foo.workingSave);
         setFilesLoaded(true);
-        console.log('success reading working save');
+        console.log('Success reading appstate to get working save.');
       })
       .catch((error) => {
         console.log(error);
-        console.log('error reading working save');
+        console.log('Error reading appState to get working save.');
       })
-
   }
-
 
   function loadDir() {
     FileSystem.readDirectoryAsync(FileSystem.documentDirectory)
@@ -40,7 +37,7 @@ export default function SaveScreen(props) {
             key: index.toString(),
             name: value
           }
-        )).filter(value => value.name != 'working_save.json' && value.name != 'notes.txt');
+        )).filter(value => value.name != 'notes.txt');
         console.log(foo);
         setFiles(foo);
         getSelected();
@@ -53,29 +50,20 @@ export default function SaveScreen(props) {
   function handleSelect() {
     console.log('Switching games...');
 
-    let uri = FileSystem.documentDirectory;
-    FileSystem.copyAsync({ 
-      from: uri + 'working_save.json', 
-      to: uri + current
-    })
-      .then(() => {
-        console.log('success copying working save to current game');
-        FileSystem.copyAsync({
-          from: uri + selected,
-          to: uri + 'working_save.json'
-        })
-          .then(() => {
-            console.log('success copying switched save to working save');
-            props.navigation.pop();
-          })
-          .catch(() => {
-            console.log('error copying switched save to working save');
-          })
-      })
-      .catch(() => {
-        console.log('error copying game to working save');
-      });
+    // Change working save in appState.json
+    let uri = FileSystem.documentDirectory + 'appState.json';
 
+    // Todo: read appState and update workingSave instead of replacing entire file
+    // In the future when we add other things in appState, this won't work.
+    let contents = JSON.stringify({ workingSave: selected }, null, 2);
+    FileSystem.writeAsStringAsync(uri, contents)
+      .then(() => {
+        console.log('Successfully wrote to appState.');
+        props.navigation.pop();
+      })
+      .catch((error) => {
+        console.log('Error writing to appState.');
+      });
   }
 
   if (filesLoaded) {
