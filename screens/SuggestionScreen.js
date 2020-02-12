@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import * as FileSystem from 'expo-file-system';
+import * as FS from 'expo-file-system';
 
 import PlayerForm from '../components/SuggestionPlayerForm.js';
 import SuspectForm from '../components/SuggestionSuspectForm.js';
@@ -29,41 +29,50 @@ export default function SuggestionScreen({ navigation }) {
 
     
     function updateSave() {
+      console.log('Updating save. Getting working save...');
       // 1. Get working save 2. Read working save 3. Update working save
 
-      let dir = FileSystem.documentDirectory;
-      FileSystem.readAsStringAsync(dir + 'appState.json')
+      let msgSuccess = 'Successfully read appstate to retrieve workingSave.';
+      let msgFailure = 'Error reading appstate.';
+      let uri = FS.documentDirectory + 'appState.json';
+      FS.readAsStringAsync(uri)
         .then((contents) => {
-          console.log('Successfully read appState to retrieve workingSave.');
-          let foo = JSON.parse(contents);
-          let fileName = foo.workingSave;
-          FileSystem.readAsStringAsync(dir + fileName)
+          let appState = JSON.parse(contents);
+          let fileName = appState.workingSave;
+          console.log(msgSuccess);
+
+          console.log('Reading save file...');
+
+          let msgSuccess2 = `Success reading file "${fileName}".`;
+          let msgFailure2 = `Error reading file "${fileName}".`;
+          let uri2 = FS.documentDirectory + fileName;
+          FS.readAsStringAsync(uri2)
             .then((contents) => {
-              console.log('Successfully read save file.');
-              let foo = JSON.parse(contents);
-              foo.suggestionHistory.push(
+              let file = JSON.parse(contents);
+              file.suggestionHistory.push(
                 {
                   player: playerInput,
                   cards: [suspectInput, weaponInput, roomInput],
                   revealer: revealerInput
                 }
               );
-              FileSystem.writeAsStringAsync(dir + fileName, JSON.stringify(foo, null, 2))
+              console.log(msgSuccess2);
+
+              console.log(`Pushing updated suggestion history to "${fileName}"...`);
+
+              let msgSuccess3 = `Success writing to "${fileName}".`;
+              let msgFailure3 = `Error writing to "${fileName}".`;
+              let uri3 = FS.documentDirectory + fileName;
+              FS.writeAsStringAsync(uri3, JSON.stringify(file, null, 2))
                 .then(() => {
-                  console.log('Successfully wrote to save file.');
-                  setSaveJson(JSON.stringify(foo, null, 2));
+                  setSaveJson(JSON.stringify(file, null, 2));
+                  console.log(msgSuccess3);
                 })
-                .catch((error) => {
-                  console.log('Error writing to save file.');
-                });
+                .catch(console.log(msgFailure3));
             })
-            .catch((error) => {
-              console.log('Error reading save file.');
-            });
+            .catch(console.log(msgFailure2));
         })
-        .catch((error) => {
-          console.log('Error reading appState to retrieve workingSave');
-        });
+        .catch(console.log(msgFailure));
     }
 
     function handleNext() {

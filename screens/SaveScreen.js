@@ -24,9 +24,7 @@ export default function SaveScreen(props) {
         setFilesLoaded(true);
         console.log(msgSuccess);
       })
-      .catch(() => {
-        console.log(msgFailure);
-      });
+      .catch(console.log(msgFailure));
   }
 
   function loadDir() {
@@ -37,7 +35,7 @@ export default function SaveScreen(props) {
     let uri = FS.documentDirectory;
     FS.readDirectoryAsync(uri)
       .then((contents) => {
-        // Add keys for FlatList and remove non-game files
+        // Add keys (for FlatList) and remove non-game files
         let files = contents
           .map((value, index) => (
               {
@@ -51,9 +49,7 @@ export default function SaveScreen(props) {
         getSelected();
         console.log(msgSuccess);
       })
-      .catch(() => {
-        console.log(msgFailure);
-      });
+      .catch(console.log(msgFailure));
   }
 
   function handleSelect() {
@@ -71,9 +67,7 @@ export default function SaveScreen(props) {
         console.log(msgSuccess);
         props.navigation.pop();
       })
-      .catch(() => {
-        console.log(msgFailure);
-      });
+      .catch(console.log(msgFailure));
   }
 
   if (filesLoaded) {

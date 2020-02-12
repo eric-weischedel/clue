@@ -17,12 +17,8 @@ export default function FileExplorer() {
       let msgFailure = 'Error deleting.';
       let uri = FS.documentDirectory + selected;
       FS.deleteAsync(uri)
-        .then(() => {
-          console.log(msgSuccess);
-        })
-        .catch(() => {
-          console.log(msgFailure);
-        })
+        .then(console.log(msgSuccess))
+        .catch(console.log(msgFailure));
     }
 
     function loadDir() {
@@ -43,9 +39,7 @@ export default function FileExplorer() {
           setFilesLoaded(true);
           console.log(msgSuccess);
         })
-        .catch(() => {
-          console.log(msgFailure);
-        });
+        .catch(console.log(msgFailure));
     }
 
     function handleItemPress(fileName) {
@@ -60,9 +54,7 @@ export default function FileExplorer() {
           setSelected(fileName);
           console.log(msgSuccess);
         })
-        .catch(() => {
-          console.log(msgFailure);
-        });
+        .catch(console.log(msgFailure));
     }
 
     if (filesLoaded) {

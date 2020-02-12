@@ -27,22 +27,17 @@ export default function HistoryScreen({ navigation }) {
 
         let msgSuccess2 = `Success reading file "${workingSave}".`;
         let msgFailure2 = `Error reading file "${workingSave}".`;
-        uri = FS.documentDirectory + workingSave;
-        FS.readAsStringAsync(uri)
+        let uri2 = FS.documentDirectory + workingSave;
+        FS.readAsStringAsync(uri2)
           .then((contents) => {
             let save = JSON.parse(contents);
             setHistory(addKeys(save.suggestionHistory));
             setHistoryLoaded(true);
             console.log(msgSuccess2);
           })
-          .catch(() => {
-            console.log(msgFailure2);
-          });
-
+          .catch(console.log(msgFailure2));
       })
-      .catch(() => {
-        console.log(msgFailure);
-      });
+      .catch(console.log(msgFailure));
   }
 
   function addKeys(hist) {

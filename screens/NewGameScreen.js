@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import * as FileSystem from 'expo-file-system';
+import * as FS from 'expo-file-system';
 
 import NewGameVersionForm from '../components/NewGameVersionForm.js';
 import NewGamePlayersForm from '../components/NewGamePlayersForm.js';
@@ -34,29 +34,24 @@ export default function NewGameScreen() {
             suggestionHistory: [],
             version: versionInput,
         };
-
-        let uri = FileSystem.documentDirectory + fileName + '.json';
-        FileSystem.writeAsStringAsync(uri, JSON.stringify(save, null, 2))
+        let msgSuccess = 'Success creating new save file.';
+        let msgFailure = 'Error creating new save file.';
+        let uri = FS.documentDirectory + fileName + '.json';
+        FS.writeAsStringAsync(uri, JSON.stringify(save, null, 2))
             .then(() => {
-                console.log('Success creating new save file.');
-                // Change working save in appState.json
-                let uri = FileSystem.documentDirectory + 'appState.json';
+                console.log(msgSuccess);
 
-                // Todo: read appState and update workingSave instead of replacing entire file
-                // In the future when we add other things in appState, this won't work.
+                console.log('Switching games...');
+
                 let contents = JSON.stringify({ workingSave: fileName + '.json'}, null, 2);
-                FileSystem.writeAsStringAsync(uri, contents)
-                .then(() => {
-                    console.log('Successfully wrote to appState.');
-                })
-                .catch((error) => {
-                    console.log('Error writing to appState.');
-                });
+                let msgSuccess2 = 'Success writing to appState.';
+                let msgFailure2 = 'Error writing to appState.'
+                let uri2 = FS.documentDirectory + 'appState.json';
+                FS.writeAsStringAsync(uri2, contents)
+                    .then(console.log(msgSuccess2))
+                    .catch(console.log(msgFailure2));
             })
-            .catch((error) => {
-                console.log(error);
-                console.log('Error creating new save file.');
-            });
+            .catch(console.log(msgFailure));
     }
 
     function handleNext() {
