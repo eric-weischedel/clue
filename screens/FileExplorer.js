@@ -75,7 +75,7 @@ export default function FileExplorer() {
             <Text style={styles.headerText}>Contents</Text>
             <ScrollView>
               <Text>{fileText}</Text>
-              <Button mode='contained' onPress={handleDelete}>Delete</Button>
+              <Button color='red' mode='contained' onPress={handleDelete}>Delete</Button>
             </ScrollView>
           </View>
         </View>
