@@ -53,19 +53,30 @@ export default function SaveScreen(props) {
   }
 
   function handleSelect() {
-    console.log(`[BEGIN] Switching games to "${selected}"...`);
+    console.log(`[BEGIN] Switching games to "${selected}". Reading appState...`);
 
-    let msgSuccess = '[SUCCESS] Successfully wrote to appState.';
-    let msgFailure = '[ERROR] Error writing to appState';
+    let msgSuccess = '[SUCCESS] Success reading appState.';
+    let msgFailure = '[ERROR] Error reading appState.';
     let uri = FS.documentDirectory + 'appState.json';
-
-    // Todo: read appState and update workingSave instead of replacing entire file
-    // In the future when we add other things in appState, this won't work.
-    let contents = JSON.stringify({ workingSave: selected }, null, 2);
-    FS.writeAsStringAsync(uri, contents)
-      .then(() => {
+    FS.readAsStringAsync(uri)
+      .then((contents) => {
+        let appState = JSON.parse(contents);
         console.log(msgSuccess);
-        props.navigation.pop();
+
+        console.log('[BEGIN] Writing to appState.');
+
+        appState.workingSave = selected;
+
+        let msgSuccess2 = '[SUCCESS] Success writing to appState.';
+        let msgFailure2 = '[ERROR] Error writing to appState';
+        let uri2 = FS.documentDirectory + 'appState.json';
+        FS.writeAsStringAsync(uri2, JSON.stringify(appState, null, 2))
+          .then(() => {
+            console.log(msgSuccess2);
+            props.navigation.pop();
+          })
+          .catch(() => console.log(msgFailure2));
+
       })
       .catch(() => console.log(msgFailure));
   }
