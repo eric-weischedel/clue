@@ -27,31 +27,31 @@ export default function NewGameScreen() {
     // 5: Initialize
 
     function handleInitialize(){
-        console.log('Initializing new game...');
+        console.log('[BEGIN] Initializing new game...');
 
         let save = {
             myCards: suspectsInput.concat(weaponsInput).concat(roomsInput),
             suggestionHistory: [],
             version: versionInput,
         };
-        let msgSuccess = 'Success creating new save file.';
-        let msgFailure = 'Error creating new save file.';
+        let msgSuccess = '[SUCCESS] Success creating new save file.';
+        let msgFailure = '[ERROR] Error creating new save file.';
         let uri = FS.documentDirectory + fileName + '.json';
         FS.writeAsStringAsync(uri, JSON.stringify(save, null, 2))
             .then(() => {
                 console.log(msgSuccess);
 
-                console.log('Switching games...');
+                console.log('[BEGIN] Switching games...');
 
                 let contents = JSON.stringify({ workingSave: fileName + '.json'}, null, 2);
-                let msgSuccess2 = 'Success writing to appState.';
-                let msgFailure2 = 'Error writing to appState.'
+                let msgSuccess2 = '[SUCCESS] Success writing to appState.';
+                let msgFailure2 = '[ERROR] Error writing to appState.'
                 let uri2 = FS.documentDirectory + 'appState.json';
                 FS.writeAsStringAsync(uri2, contents)
-                    .then(console.log(msgSuccess2))
-                    .catch(console.log(msgFailure2));
+                    .then(() => console.log(msgSuccess2))
+                    .catch(() => console.log(msgFailure2));
             })
-            .catch(console.log(msgFailure));
+            .catch(() => console.log(msgFailure));
     }
 
     function handleNext() {

@@ -11,21 +11,21 @@ export default function FileExplorer() {
     const [fileText, setFileText] = useState('No file selected.');
 
     function handleDelete() {
-      console.log(`Deleting file ${selected}...`);
+      console.log(`[BEGIN] Deleting file ${selected}...`);
 
-      let msgSuccess = 'Delete successful.';
-      let msgFailure = 'Error deleting.';
+      let msgSuccess = '[SUCCESS] Delete successful.';
+      let msgFailure = '[ERROR] Error deleting.';
       let uri = FS.documentDirectory + selected;
       FS.deleteAsync(uri)
-        .then(console.log(msgSuccess))
-        .catch(console.log(msgFailure));
+        .then(() => console.log(msgSuccess))
+        .catch(() => console.log(msgFailure));
     }
 
     function loadDir() {
-      console.log('Reading document directory...');
+      console.log('[BEGIN] Reading document directory...');
 
-      let msgSuccess = 'Successfully read document directory.';
-      let msgFailure = 'Error reading document directory.';
+      let msgSuccess = '[SUCCESS] Successfully read document directory.';
+      let msgFailure = '[ERROR] Error reading document directory.';
       let uri = FS.documentDirectory;
       FS.readDirectoryAsync(uri)
         .then((contents) => {
@@ -39,14 +39,14 @@ export default function FileExplorer() {
           setFilesLoaded(true);
           console.log(msgSuccess);
         })
-        .catch(console.log(msgFailure));
+        .catch(() => console.log(msgFailure));
     }
 
     function handleItemPress(fileName) {
-      console.log(`Reading file "${fileName}" to display...`)
+      console.log(`[BEGIN] Reading file "${fileName}" to display...`)
 
-      let msgSuccess = 'Success reading file.';
-      let msgFailure = 'Failure reading file.';
+      let msgSuccess = '[SUCCESS] Success reading file.';
+      let msgFailure = '[ERROR] Failure reading file.';
       let uri = FS.documentDirectory + fileName;
       FS.readAsStringAsync(uri)
         .then((contents) => {
@@ -54,7 +54,7 @@ export default function FileExplorer() {
           setSelected(fileName);
           console.log(msgSuccess);
         })
-        .catch(console.log(msgFailure));
+        .catch(() => console.log(msgFailure));
     }
 
     if (filesLoaded) {

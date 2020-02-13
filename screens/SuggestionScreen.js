@@ -29,11 +29,11 @@ export default function SuggestionScreen({ navigation }) {
 
     
     function updateSave() {
-      console.log('Updating save. Getting working save...');
+      console.log('[BEGIN] Updating save. Getting working save...');
       // 1. Get working save 2. Read working save 3. Update working save
 
-      let msgSuccess = 'Successfully read appstate to retrieve workingSave.';
-      let msgFailure = 'Error reading appstate.';
+      let msgSuccess = '[SUCCESS] Successfully read appstate to retrieve workingSave.';
+      let msgFailure = '[ERROR] Error reading appstate.';
       let uri = FS.documentDirectory + 'appState.json';
       FS.readAsStringAsync(uri)
         .then((contents) => {
@@ -41,10 +41,10 @@ export default function SuggestionScreen({ navigation }) {
           let fileName = appState.workingSave;
           console.log(msgSuccess);
 
-          console.log('Reading save file...');
+          console.log('[BEGIN] Reading save file...');
 
-          let msgSuccess2 = `Success reading file "${fileName}".`;
-          let msgFailure2 = `Error reading file "${fileName}".`;
+          let msgSuccess2 = `[SUCCESS] Success reading file "${fileName}".`;
+          let msgFailure2 = `[ERROR] Error reading file "${fileName}".`;
           let uri2 = FS.documentDirectory + fileName;
           FS.readAsStringAsync(uri2)
             .then((contents) => {
@@ -58,21 +58,21 @@ export default function SuggestionScreen({ navigation }) {
               );
               console.log(msgSuccess2);
 
-              console.log(`Pushing updated suggestion history to "${fileName}"...`);
+              console.log(`[BEGIN] Pushing updated suggestion history to "${fileName}"...`);
 
-              let msgSuccess3 = `Success writing to "${fileName}".`;
-              let msgFailure3 = `Error writing to "${fileName}".`;
+              let msgSuccess3 = `[SUCCESS] Success writing to "${fileName}".`;
+              let msgFailure3 = `[ERROR] Error writing to "${fileName}".`;
               let uri3 = FS.documentDirectory + fileName;
               FS.writeAsStringAsync(uri3, JSON.stringify(file, null, 2))
                 .then(() => {
                   setSaveJson(JSON.stringify(file, null, 2));
                   console.log(msgSuccess3);
                 })
-                .catch(console.log(msgFailure3));
+                .catch(() => console.log(msgFailure3));
             })
-            .catch(console.log(msgFailure2));
+            .catch(() => console.log(msgFailure2));
         })
-        .catch(console.log(msgFailure));
+        .catch(() => console.log(msgFailure));
     }
 
     function handleNext() {

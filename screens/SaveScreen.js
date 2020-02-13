@@ -12,10 +12,10 @@ export default function SaveScreen(props) {
   const [files, setFiles] = useState([null]);
 
   function getSelected() {
-    console.log('Reading appState to get selected game...');
+    console.log('[BEGIN] Reading appState to get selected game...');
 
-    let msgSuccess = 'Success reading appState.';
-    let msgFailure = 'Error reading appState.';
+    let msgSuccess = '[SUCCESS] Success reading appState.';
+    let msgFailure = '[ERROR] Error reading appState.';
     let uri = FS.documentDirectory + 'appState.json';
     FS.readAsStringAsync(uri)
       .then((contents) => {
@@ -24,14 +24,14 @@ export default function SaveScreen(props) {
         setFilesLoaded(true);
         console.log(msgSuccess);
       })
-      .catch(console.log(msgFailure));
+      .catch(() => console.log(msgFailure));
   }
 
   function loadDir() {
-    console.log('Reading document directory...');
+    console.log('[BEGIN] Reading document directory...');
 
-    let msgSuccess = 'Successfully read document directory.';
-    let msgFailure = 'Error reading document directory.';
+    let msgSuccess = '[SUCCESS] Successfully read document directory.';
+    let msgFailure = '[ERROR] Error reading document directory.';
     let uri = FS.documentDirectory;
     FS.readDirectoryAsync(uri)
       .then((contents) => {
@@ -49,14 +49,14 @@ export default function SaveScreen(props) {
         getSelected();
         console.log(msgSuccess);
       })
-      .catch(console.log(msgFailure));
+      .catch(() => console.log(msgFailure));
   }
 
   function handleSelect() {
-    console.log(`Switching games to "${selected}"...`);
+    console.log(`[BEGIN] Switching games to "${selected}"...`);
 
-    let msgSuccess = 'Successfully wrote to appState.';
-    let msgFailure = 'Error writing to appState';
+    let msgSuccess = '[SUCCESS] Successfully wrote to appState.';
+    let msgFailure = '[ERROR] Error writing to appState';
     let uri = FS.documentDirectory + 'appState.json';
 
     // Todo: read appState and update workingSave instead of replacing entire file
@@ -67,7 +67,7 @@ export default function SaveScreen(props) {
         console.log(msgSuccess);
         props.navigation.pop();
       })
-      .catch(console.log(msgFailure));
+      .catch(() => console.log(msgFailure));
   }
 
   if (filesLoaded) {

@@ -12,10 +12,10 @@ export default function HistoryScreen({ navigation }) {
   const [history, setHistory] = useState([]);
 
   function getHistory() {
-    console.log('Reading appState to get working save...');
+    console.log('[BEGIN] Reading appState to get working save...');
 
-    let msgSuccess = 'Success reading appState.';
-    let msgFailure = 'Error reading appState.';
+    let msgSuccess = '[SUCCESS] Success reading appState.';
+    let msgFailure = '[ERROR] Error reading appState.';
     let uri = FS.documentDirectory + 'appState.json';
     FS.readAsStringAsync(uri)
       .then((contents) => {
@@ -23,10 +23,10 @@ export default function HistoryScreen({ navigation }) {
         let workingSave = appState.workingSave;
         console.log(msgSuccess);
 
-        console.log(`Reading file "${workingSave}" for suggestion history...`)
+        console.log(`[BEGIN] Reading file "${workingSave}" for suggestion history...`)
 
-        let msgSuccess2 = `Success reading file "${workingSave}".`;
-        let msgFailure2 = `Error reading file "${workingSave}".`;
+        let msgSuccess2 = `[SUCCESS] Success reading file "${workingSave}".`;
+        let msgFailure2 = `[ERROR] Error reading file "${workingSave}".`;
         let uri2 = FS.documentDirectory + workingSave;
         FS.readAsStringAsync(uri2)
           .then((contents) => {
@@ -35,9 +35,9 @@ export default function HistoryScreen({ navigation }) {
             setHistoryLoaded(true);
             console.log(msgSuccess2);
           })
-          .catch(console.log(msgFailure2));
+          .catch(() => console.log(msgFailure2));
       })
-      .catch(console.log(msgFailure));
+      .catch(() => console.log(msgFailure));
   }
 
   function addKeys(hist) {

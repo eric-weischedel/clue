@@ -14,35 +14,29 @@ export default function NotesScreen() {
     const fileName = 'notes.txt';
 
     function handleWriteNotes() {
-      // path: FileSystem.documentDirectory
-      // stub: FileSystem.writeAsStringAsync(fileUri, contents, [options])
+      console.log('[BEGIN] Updating notes...');
 
-      let fileUri = FileSystem.documentDirectory + fileName;
       let contents = notesText;
-
-      FileSystem.writeAsStringAsync(fileUri, contents)
-        .then(() => {
-          console.log('Succesfully wrote to file ' + fileUri);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      let msgSuccess = '[SUCCESS] Successfully wrote to notes.';
+      let msgFailure = '[ERROR] Error writing to notes.';
+      let uri = FileSystem.documentDirectory + fileName;
+      FileSystem.writeAsStringAsync(uri, contents)
+        .then(console.log(msgSuccess))
+        .catch(() => console.log(msgFailure));
     }
 
     function handleReadNotes() {
-      // path: FileSystem.documentDirectory + 'fileName.txt'
-      // stub: FileSystem.readAsStringAsync(fileUri, [options])
+      console.log('[BEGIN] Reading notes...');
 
-      let fileUri = FileSystem.documentDirectory + fileName;
-
-      FileSystem.readAsStringAsync(fileUri)
+      let msgSuccess = '[SUCCESS] Success reading notes.';
+      let msgFailure = '[ERROR] Error reading notes.';
+      let uri = FileSystem.documentDirectory + fileName;
+      FileSystem.readAsStringAsync(uri)
         .then((contents) => {
           setNotesText(contents);
-          console.log('Successfully read file ' + fileUri);
+          console.log(msgSuccess);
         })
-        .catch((error) => {
-          console.log(error)
-        });
+        .catch(() => console.log(msgFailure));
     }
 
     return (
