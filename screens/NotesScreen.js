@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ActivityIndicator } from 'react-native';
 import { Button } from 'react-native-paper';
 import * as FS from 'expo-file-system';
 
+import Colors from '../styles/Colors.js';
 
-export default function NotesScreen() {
-    const [notesText, setNotesText] = React.useState('');
+
+export default function NotesScreen(props) {
+    const [notesText, setNotesText] = useState('');
+    const [notesLoaded, setNotesLoaded] = useState(false);
+    const [saveBtnLoading, setSaveBtnLoading] = useState(false);
 
     function handleClearNotes() {
       setNotesText('');
@@ -33,6 +37,8 @@ export default function NotesScreen() {
 
     async function handleWriteNotes() {
 
+      setSaveBtnLoading(true);
+
       let file = await getWorkingSave();
 
       console.log('[BEGIN] Updating notes. Reading working save...');
@@ -52,7 +58,10 @@ export default function NotesScreen() {
           let msgFailure2 = '[ERROR] Error updating working save.';
           let uri2 = FS.documentDirectory + file;
           FS.writeAsStringAsync(uri2, JSON.stringify(save, null, 2))
-            .then(() => console.log(msgSuccess2))
+            .then(() => {
+              console.log(msgSuccess2);
+              props.navigation.pop();
+            })
             .catch(() => console.log(msgFailure2));
         })
         .catch(() => console.log(msgFailure));
@@ -73,29 +82,43 @@ export default function NotesScreen() {
           let notes = save.notes ? save.notes : 'No notes on file.';
           setNotesText(notes);
           console.log(msgSuccess);
+          setNotesLoaded(true);
         })
         .catch(() => {
           console.log(msgFailure);
         });
     }
 
-    return (
-        <View style={styles.container}>
+    if (notesLoaded) {
+      return (
+          <View style={styles.container}>
 
-            <Button style={styles.button} mode='contained' onPress={handleWriteNotes}>Save</Button>
-            <Button style={styles.button} mode='outlined' onPress={handleReadNotes}>Load</Button>
-            <Button style={styles.button} mode='outlined' onPress={handleClearNotes}>Clear</Button>
+            <View style={styles.buttonsContainer}>
+              <Button style={styles.button} color='#777' mode='outlined' onPress={handleClearNotes}>Clear</Button>
+              <View style={{marginHorizontal: 5}}></View>
+              <Button style={styles.button} loading={saveBtnLoading} color={Colors.primary} mode='outlined' onPress={handleWriteNotes}>Save</Button>
+            </View>
 
-            <TextInput
-                style={styles.textInput}
-                multiline={true}
-                numberOfLines={10}
-                placeholder='Start typing here...'
-                value={notesText}
-                onChangeText={text => setNotesText(text)}
-            />
+              <TextInput
+                  style={styles.textInput}
+                  multiline={true}
+                  numberOfLines={10}
+                  placeholder='Start typing here...'
+                  value={notesText}
+                  onChangeText={text => setNotesText(text)}
+                  autoFocus={true}
+              />
+              
+          </View>
+      );
+    } else {
+      handleReadNotes();
+      return (
+        <View>
+          <ActivityIndicator size="large" color="#cccccc" />
         </View>
-    );
+      );
+    }
 }
 
 const styles = StyleSheet.create({
@@ -103,17 +126,24 @@ const styles = StyleSheet.create({
     flex: 1,
     alignContent: 'center',
     backgroundColor: '#fff',
-    padding: 30
+    paddingHorizontal: 30
+  },
+  buttonsContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginVertical: 10
   },
   button: {
-    marginVertical: 5
+    flex: 1,
+    marginVertical: 5,
   },
   textInput: {
     padding: 10,
     textAlignVertical: 'top', 
-    borderColor: '#ccc',
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderStyle: 'solid'
+    borderColor: '#eee',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderRadius: 5
   }
 });
