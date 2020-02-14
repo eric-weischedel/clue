@@ -12,7 +12,7 @@ import NewGameFilenameForm from '../components/NewGameFilenameForm.js';
 export default function NewGameScreen() {
     const [formStage, setFormStage] = useState(0);
     const [versionInput, setVersionInput] = useState('');
-    const [playersInput, setPlayersInput] = useState([]);
+    const [playersInput, setPlayersInput] = useState(['']);
     const [suspectsInput, setSuspectsInput] = useState([]);
     const [weaponsInput, setWeaponsInput] = useState([]);
     const [roomsInput, setRoomsInput] = useState([]);

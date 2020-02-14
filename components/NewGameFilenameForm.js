@@ -15,6 +15,7 @@ export default function NewGameFilenameForm(props) {
                 placeholder='Type a file name...'
                 value={props.fileName}
                 onChangeText={(text) => props.setFileName(text)}
+                onSubmitEditing={props.handleNext}
             />
 
             <FAB 

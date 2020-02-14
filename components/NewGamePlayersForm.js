@@ -1,50 +1,58 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TextInput, FlatList, TouchableOpacity } from 'react-native';
 import { FAB, Button } from 'react-native-paper';
 
 import Colors from '../styles/Colors.js';
-import NewGamePlayerItem from '../components/NewGamePlayerItem.js';
 
 export default function NewGamePlayersForm(props) {
 
+  const [players, setPlayers] = useState(props.playersInput);
+  const [refresh, doRefresh] = useState(false);
+
   function handleAddPlayer() {
-    console.log('ay');
+    if (players.length < 6) {
+      players.push('');
+      doRefresh(!refresh);
+    }
   }
 
-  function handleChangeText(text, index) {
-    var players = props.playersInput;
-    players[index] = text;
-    props.setPlayersInput(players);
+  function handleRemovePlayer() {
+    players.pop();
+    doRefresh(!refresh);
+  }
+
+  function handleChange(value, index) {
+    players[index] = value;
+    props.setPlayersInput(players.filter(name => name != ''));
   }
 
   return (
     <View style={styles.container}>
   
-        <Text style={styles.headerText}>Who is playing?</Text>
+        <Text style={styles.headerText}>Who are your opponents?</Text>
 
-        <TextInput 
-          style={styles.textInput}
-          placeholder='Type a name...'
-          onChangeText={text => handleChangeText(text, 0)}
-        />
-        <TextInput 
-          style={styles.textInput}
-          placeholder='Type a name...'
-          onChangeText={text => handleChangeText(text, 1)}
-        />
-        <TextInput 
-          style={styles.textInput}
-          placeholder='Type a name...'
-          onChangeText={text => handleChangeText(text, 2)}
-        />
-        <TextInput 
-          style={styles.textInput}
-          placeholder='Type a name...'
-          onChangeText={text => handleChangeText(text, 3)}
+        <View style={styles.buttonsContainer}>
+          <Button style={styles.button} onPress={handleRemovePlayer} mode='outlined' color='#777'>Remove Player</Button>
+          <View style={{marginHorizontal: 5}}></View>
+          <Button style={styles.button} onPress={handleAddPlayer} mode='contained' color={Colors.secondary}>Add Player</Button>
+        </View>
+
+        <FlatList
+          data={players.map((value, index) => ({ name: value, key: index.toString() }))}
+          extraData={refresh}
+          renderItem={({ item }) => (
+            <View key={item.key}>
+              <TextInput 
+                style={styles.textInput} 
+                clearButtonMode='always'
+                onChangeText={(text) => handleChange(text, item.key)} 
+                placeholder='Type name here...'
+                defaultValue={item.name}
+              />
+            </View>
+          )}
         />
 
-        <Button style={styles.addButton} icon='plus' onPress={handleAddPlayer} mode='contained' color='#eee'></Button>
-    
         <FAB 
             visible={true}
             style={styles.fab} 
@@ -70,15 +78,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignContent: 'center',
+    paddingHorizontal: 20
+  },
+  buttonsContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 25
   },
   headerText: {
-    marginLeft: 20,
-    marginVertical: 20,
-    fontSize: 18
+    marginTop: 20,
+    fontSize: 18,
   },
   textInput: {
     paddingTop: 20,
-    marginHorizontal: 20,
     borderBottomColor: '#ccc',
     borderBottomWidth: 1,
     fontSize: 16,
@@ -96,9 +109,7 @@ const styles = StyleSheet.create({
     bottom: 30,
     backgroundColor: '#777'
   },
-  addButton: {
-    marginTop: 10,
-    width: 245,
-    alignSelf: 'center'
+  button: {
+    flex: 1,
   }
 });
