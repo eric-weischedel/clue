@@ -54,7 +54,7 @@ export default function NewGamePlayersForm(props) {
         />
 
         <FAB 
-            visible={true}
+            visible={players.length > 0}
             style={styles.fab} 
             icon='chevron-right' 
             color='white' 

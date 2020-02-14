@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#777',
         marginLeft: 20,
-        marginVertical: 20,
+        marginVertical: 27,
         fontFamily: 'raleway-bold'
     },
     navItem: {

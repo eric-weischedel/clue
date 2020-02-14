@@ -18,7 +18,7 @@ export default function MainScreen({ navigation }) {
         <View style={styles.titleContainer}>
           <Text style={ styles.headerText }>Probabilities</Text>
           <TouchableOpacity style={ styles.menuButton } onPress={() => navigation.openDrawer()}>
-            <Icon name='navicon' type='evilicon' size={32} color={Colors.primary}/>
+            <Icon name='menu' type='feather' size={24} color={Colors.primary}/>
           </TouchableOpacity>
         </View>
         <View style={styles.subheaderContainer}>
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary
   },
   headerText: {
-    fontSize: 26,
+    fontSize: 24,
     marginLeft: 20,
     color: '#777',
     fontFamily: 'raleway-bold',
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'white',
-    marginTop: 15,
+    marginTop: 5,
     paddingBottom: 12
   },
   headerContainer: {

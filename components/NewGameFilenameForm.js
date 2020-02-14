@@ -16,6 +16,7 @@ export default function NewGameFilenameForm(props) {
                 value={props.fileName}
                 onChangeText={(text) => props.setFileName(text)}
                 onSubmitEditing={props.handleNext}
+                autoFocus={true}
             />
 
             <FAB 
