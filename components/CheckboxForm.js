@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
       position: 'absolute',
       right: 20,
       bottom: 30,
-      backgroundColor: Colors.green
+      backgroundColor: Colors.confirm
     },
     fabBack: {
       position: 'absolute',
