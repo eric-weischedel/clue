@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import * as FS from 'expo-file-system';
 import { Button } from 'react-native-paper';
+
+import Loading from '../components/Loading.js';
 
 export default function FileExplorer() {
 
@@ -83,9 +85,7 @@ export default function FileExplorer() {
     } else {
       loadDir();
       return (
-        <View>
-          <ActivityIndicator size="large" color="#cccccc" />
-        </View>
+        <Loading />
       );
     }
   }

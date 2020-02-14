@@ -64,6 +64,17 @@ export default function SideMenu({ navigation }) {
                     />
                     <Text style={styles.navText}>File Explorer</Text>
                 </TouchableOpacity>
+                
+                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Test')}>
+                    <Icon
+                        style={styles.navIcon}
+                        name='terminal'
+                        type='feather'
+                        color='#000'
+                        size={24}
+                    />
+                    <Text style={styles.navText}>Test Screen</Text>
+                </TouchableOpacity>
 
             </SafeAreaView>
         </ScrollView>

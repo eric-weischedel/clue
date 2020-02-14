@@ -1,19 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import Loading from '../components/Loading.js';
 
 export default function SecondaryScreen() {
   return (
-    <View style={styles.container}>
-      <Text>This is a screen intended for future use.</Text>
-    </View>
+    <Loading />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

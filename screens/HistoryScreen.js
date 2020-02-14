@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Text, FlatList } from 'react-native';
 import * as FS from 'expo-file-system';
 import { Button } from 'react-native-paper';
 
 import HistoryItem from '../components/HistoryItem.js';
-import Colors from '../styles/Colors.js';
+import Loading from '../components/Loading.js';
 
 export default function HistoryScreen({ navigation }) {
 
@@ -81,9 +81,7 @@ export default function HistoryScreen({ navigation }) {
   } else {
     getHistory();
     return (
-      <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
-        <ActivityIndicator size='large' color={Colors.secondary} />
-      </View>
+      <Loading />
     );
   }
 }

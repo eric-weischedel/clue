@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { Button } from 'react-native-paper';
 import * as FS from 'expo-file-system';
 
 import Colors from '../styles/Colors.js';
+import Loading from '../components/Loading.js';
 
 
 export default function NotesScreen(props) {
@@ -114,9 +115,7 @@ export default function NotesScreen(props) {
     } else {
       handleReadNotes();
       return (
-        <View>
-          <ActivityIndicator size="large" color="#cccccc" />
-        </View>
+        <Loading />
       );
     }
 }

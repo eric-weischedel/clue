@@ -8,6 +8,7 @@ import WeaponForm from '../components/SuggestionWeaponForm.js';
 import RoomForm from '../components/SuggestionRoomForm.js';
 import RevealerForm from '../components/SuggestionRevealerForm.js';
 
+
 export default function SuggestionScreen({ navigation }) {
 
     const [playerInput, setPlayerInput] = useState('');

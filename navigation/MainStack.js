@@ -8,6 +8,7 @@ import HistoryScreen from '../screens/HistoryScreen.js';
 import FileExplorer from '../screens/FileExplorer.js';
 import NewGameScreen from '../screens/NewGameScreen.js';
 import SaveScreen from '../screens/SaveScreen.js';
+import SecondaryScreen from '../screens/SecondaryScreen';
 
 const screens = {
   Main: {
@@ -45,6 +46,9 @@ const screens = {
     navigationOptions: {
       title: 'Saved Games'
     }
+  },
+  Test: {
+    screen: SecondaryScreen
   }
 };
 

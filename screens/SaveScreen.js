@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import * as FS from 'expo-file-system';
 
 import BaseForm from '../components/BaseForm.js';
-import Colors from '../styles/Colors.js';
+import Loading from '../components/Loading.js';
 
 export default function SaveScreen(props) {
   
@@ -96,9 +96,7 @@ export default function SaveScreen(props) {
   } else {
     loadDir();
     return (
-      <View style={styles.container}>
-        <ActivityIndicator size='large' color={Colors.secondary} />
-      </View>
+      <Loading />
     );
   }
 }
