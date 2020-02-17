@@ -1,15 +1,20 @@
 import React from 'react';
 
 import BaseForm from './BaseForm.js';
+import GameCards from '../assets/cards.js';
 
 export default function SuggestionRoomForm(props) {
 
-    const rooms = [
-        {key: '1', name: 'Ball Room'},
-        {key: '2', name: 'Pizza Chamber'},
-        {key: '3', name: 'Carriage House'},
-        {key: '4', name: 'The Moon'},
-      ];
+    const rooms = addKeys(GameCards.rooms);
+
+    function addKeys(arr) {
+        return arr.map((value, index) => (
+            {
+                key: index.toString(),
+                name: value
+            }
+        ));
+    }
 
     return (
         <BaseForm

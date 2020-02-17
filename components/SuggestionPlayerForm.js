@@ -4,6 +4,7 @@ import BaseForm from './BaseForm.js';
 
 export default function SuggestionPlayerForm(props) {
 
+    // TODO: Get real players list from game save
     const players = [
         {key: '1', name: 'Joel'},
         {key: '2', name: 'Bryan'},

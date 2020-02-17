@@ -1,15 +1,20 @@
 import React from 'react';
 
 import CheckboxForm from '../components/CheckboxForm.js';
+import GameCards from '../assets/cards.js';
 
 export default function NewGameRoomsForm(props) {
 
-    const rooms = [
-        {key: '1', name: 'Ball Room'},
-        {key: '2', name: 'Pizza Chamber'},
-        {key: '3', name: 'Carriage House'},
-        {key: '4', name: 'The Moon'},
-      ];
+    const rooms = addKeys(GameCards.rooms);
+    
+    function addKeys(arr) {
+        return arr.map((value, index) => (
+            {
+                key: index.toString(),
+                name: value
+            }
+        ));
+    }
 
     return (
         <CheckboxForm 
