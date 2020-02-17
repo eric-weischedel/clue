@@ -31,6 +31,7 @@ export default function NewGameScreen() {
 
         let save = {
             myCards: suspectsInput.concat(weaponsInput).concat(roomsInput),
+            players: playersInput,
             suggestionHistory: [],
             version: versionInput,
         };
