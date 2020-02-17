@@ -37,14 +37,14 @@ export default function NewGameScreen() {
         };
         let msgSuccess = '[SUCCESS] Success creating new save file.';
         let msgFailure = '[ERROR] Error creating new save file.';
-        let uri = FS.documentDirectory + fileName + '.json';
+        let uri = FS.documentDirectory + fileName + '_save.json';
         FS.writeAsStringAsync(uri, JSON.stringify(save, null, 2))
             .then(() => {
                 console.log(msgSuccess);
 
                 console.log('[BEGIN] Switching games...');
 
-                let contents = JSON.stringify({ workingSave: fileName + '.json'}, null, 2);
+                let contents = JSON.stringify({ workingSave: fileName + '_save.json'}, null, 2);
                 let msgSuccess2 = '[SUCCESS] Success writing to appState.';
                 let msgFailure2 = '[ERROR] Error writing to appState.'
                 let uri2 = FS.documentDirectory + 'appState.json';

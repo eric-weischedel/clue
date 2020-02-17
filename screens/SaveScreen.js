@@ -20,7 +20,7 @@ export default function SaveScreen(props) {
     FS.readAsStringAsync(uri)
       .then((contents) => {
         let appState = JSON.parse(contents);
-        setSelected(appState.workingSave);
+        setSelected(appState.workingSave.slice(0, -10));
         setFilesLoaded(true);
         console.log(msgSuccess);
       })
@@ -35,16 +35,16 @@ export default function SaveScreen(props) {
     let uri = FS.documentDirectory;
     FS.readDirectoryAsync(uri)
       .then((contents) => {
-        // Add keys (for FlatList) and remove non-game files
+        // Remove non-game files, add keys (for FlatList), and remove suffix from name
         let files = contents
+          .filter(value => value.endsWith('_save.json'))
           .map((value, index) => (
               {
                 key: index.toString(),
-                name: value
+                name: value.slice(0, -10)
               }
             )
-          )
-          .filter(value => value.name != 'notes.txt' && value.name != 'appState.json');
+          );
         setFiles(files);
         getSelected();
         console.log(msgSuccess);
@@ -65,7 +65,7 @@ export default function SaveScreen(props) {
 
         console.log('[BEGIN] Writing to appState.');
 
-        appState.workingSave = selected;
+        appState.workingSave = selected + '_save.json';
 
         let msgSuccess2 = '[SUCCESS] Success writing to appState.';
         let msgFailure2 = '[ERROR] Error writing to appState';
