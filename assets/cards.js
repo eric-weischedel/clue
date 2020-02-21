@@ -5,7 +5,7 @@ const clueCardsOriginal = {
         'Colonel Mustard',
         'Professor Plum',
         'Mrs. Peacock',
-        'Mrs. White'
+        'Mrs. White',
     ],
     weapons: [
         'Candlestick',
