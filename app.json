@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "navtest2",
-    "slug": "navtest2",
+    "name": "Clue Me In",
+    "slug": "clue-me-in",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -23,7 +23,16 @@
       "**/*"
     ],
     "android": {
-      "package": "com.mycompany.navtest2"
+      "splash": {
+        "backgroundColor": "#ffffff",
+        "resizeMode": "native",
+        "mdpi": "./assets/splash.png",
+        "hdpi": "./assets/splash.png",
+        "xhdpi": "./assets/splash.png",
+        "xxhdpi": "./assets/splash.png",
+        "xxxhdpi": "./assets/splash.png"
+      },
+      "package": "com.ericweischedel.cluemein"
     }
   }
 }

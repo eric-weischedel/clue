@@ -69,12 +69,12 @@ const TabNavigator = createMaterialTopTabNavigator({
       },
       indicatorStyle: {
         backgroundColor: Colors.primary,
-        height: 2,
+        height: 3,
         position: 'absolute',
         top: 0
       },
       showIcon: true,
-      showLabel: true
+      showLabel: false
     }
   });
 

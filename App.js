@@ -6,6 +6,12 @@ import { StatusBar, SafeAreaView } from 'react-native';
 import DrawerNavigator from './navigation/DrawerNavigator.js';
 
 const getFonts = () => Font.loadAsync({
+  'poppins-regular': require('./assets/fonts/Poppins-Regular.ttf'),
+  'poppins-bold': require('./assets/fonts/Poppins-Bold.ttf'),
+  'poppins-medium': require('./assets/fonts/Poppins-Medium.ttf'),
+  'poppins-italic': require('./assets/fonts/Poppins-Italic.ttf'),
+  'poppins-mediumitalic': require('./assets/fonts/Poppins-MediumItalic.ttf'),
+
   'raleway-regular': require('./assets/fonts/Raleway-Regular.ttf'),
   'raleway-medium': require('./assets/fonts/Raleway-Medium.ttf'),
   'raleway-light': require('./assets/fonts/Raleway-Light.ttf'),

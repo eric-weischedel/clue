@@ -93,10 +93,10 @@ const styles = StyleSheet.create({
     },
     menuHeaderText: {
         fontSize: 18,
-        color: '#777',
+        color: '#000',
         marginLeft: 20,
         marginVertical: 27,
-        fontFamily: 'raleway-bold'
+        fontFamily: 'poppins-bold'
     },
     navItem: {
         display: 'flex',
@@ -114,6 +114,8 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         fontSize: 16,
         color: '#000',
-        fontFamily: 'raleway-medium'
+        fontFamily: 'poppins-regular',
+        includeFontPadding: false,
+        textAlignVertical: 'center'
     }
 });

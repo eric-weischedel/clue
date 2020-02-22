@@ -8,22 +8,28 @@ export default function Tab(props) {
 
   const clueCards = props.cards;
 
+  function checkforEven(key) {
+    if ((parseInt(key) + 1) % 2 == 0) {
+      return { backgroundColor: '#FBFBFB' }
+    }
+  }
+
   return (
     <View style={styles.container}>
       <FlatList 
         showsVerticalScrollIndicator={false}
         data={clueCards}
         renderItem={({ item }) => (
-          <View style={styles.cardContainer}>
+          <View style={[styles.cardContainer, checkforEven(item.key)]}>
             <Text style={styles.cardText}>{item.name}</Text>
             <View style={styles.percentageContainer}>
               <Text style={styles.probabilityText}>{item.probability}%</Text>
               <ProgressCircle 
-                style={{ height: 34, width: 34 }} 
-                strokeWidth={5} 
+                style={{ height: 32, width: 32 }} 
+                strokeWidth={4} 
                 progress={item.probability / 100} 
                 progressColor={Colors.secondary}
-                backgroundColor={'#eeeeee'} />
+                backgroundColor={'#eaeaea'} />
             </View>
           </View>
         )}
@@ -41,7 +47,7 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingVertical: 19,
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
@@ -53,18 +59,21 @@ const styles = StyleSheet.create({
   percentageContainer: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 10
+    alignItems: 'center'
   },
   cardText: {
     fontSize: 16,
-    fontFamily: 'raleway-medium',
-    color: 'black'
+    fontFamily: 'poppins-regular',
+    color: '#000',
+    includeFontPadding: false,
+    textAlignVertical: 'center'
   },
   probabilityText: {
+    marginRight: 10,
     fontSize: 16,
-    fontFamily: 'raleway-regular',
-    color: 'black',
-    marginRight: 10
+    fontFamily: 'poppins-regular',
+    color: '#000',
+    includeFontPadding: false,
+    textAlignVertical: 'center'
   }
 });

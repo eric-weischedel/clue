@@ -15,16 +15,10 @@ export default function MainScreen({ navigation }) {
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       {/* Header */}
       <View style={styles.headerContainer}>
-        <View style={styles.titleContainer}>
-          <Text style={ styles.headerText }>Probabilities</Text>
-          <TouchableOpacity style={ styles.menuButton } onPress={() => navigation.openDrawer()}>
-            <Icon name='menu' type='feather' size={24} color={Colors.primary}/>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.subheaderContainer}>
-          <Text style={styles.subheader}>NAME</Text>
-          <Text style={[styles.subheader, { marginRight: 55 }]}>CHANCE</Text>
-        </View>
+        <Text style={ styles.headerText }>Probabilities</Text>
+        <TouchableOpacity style={ styles.menuButton } onPress={() => navigation.openDrawer()}>
+          <Icon name='menu' type='feather' size={26} color={Colors.primary}/>
+        </TouchableOpacity>
       </View>
       {/* Tabs */}
       <TabNavigator screenProps={ cards } />
@@ -43,41 +37,30 @@ const styles = StyleSheet.create({
   fab: {
     position: 'absolute',
     right: 20,
-    bottom: 100,
+    bottom: 70,
     backgroundColor: Colors.primary
   },
   headerText: {
     fontSize: 24,
     marginLeft: 20,
-    color: '#777',
-    fontFamily: 'raleway-bold',
+    color: '#000',
+    fontFamily: 'poppins-bold',
+    includeFontPadding: false,
+    textAlignVertical: 'center',
   },
   menuButton: {
     padding: 20,
   },
-  titleContainer: {
+  headerContainer: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'white',
     marginTop: 5,
-    paddingBottom: 12
-  },
-  headerContainer: {
+    paddingBottom: 4,
     borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
+    borderBottomColor: '#ccc',
     borderStyle: 'solid',
-  },
-  subheaderContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  subheader: {
-    marginLeft: 20,
-    fontFamily: 'raleway-regular',
-    fontSize: 12,
-    marginBottom: 8
   }
 });
