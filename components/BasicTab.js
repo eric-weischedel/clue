@@ -9,7 +9,7 @@ export default function Tab(props) {
   const clueCards = props.cards;
 
   function checkforEven(key) {
-    if ((parseInt(key) + 1) % 2 == 0) {
+    if (parseInt(key) % 2 == 0) {
       return { backgroundColor: '#FBFBFB' }
     }
   }
