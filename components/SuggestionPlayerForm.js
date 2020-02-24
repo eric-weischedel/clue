@@ -6,18 +6,15 @@ import { readWorkingSave, addKeys } from '../global/FileSystem.js';
 
 export default function SuggestionPlayerForm(props) {
 
-    const [playersLoaded, setPlayersLoaded] = useState(false);
     const [players, setPlayers] = useState(null);
 
-    async function getPlayers() {
-        let save = await readWorkingSave();
-        save = JSON.parse(save);
-        let players = addKeys(save.players);
-        setPlayers(players);
-        setPlayersLoaded(true);
+    function loadPlayers() {
+        let p = [...props.players];
+        p.push('Me');
+        setPlayers(addKeys(p));
     }
 
-    if (playersLoaded) {
+    if (players) {
         return (
             <BaseForm
                 options={players}
@@ -31,7 +28,7 @@ export default function SuggestionPlayerForm(props) {
             />
         );
     } else {
-        getPlayers();
+        loadPlayers();
         return (
             <Loading />
         );

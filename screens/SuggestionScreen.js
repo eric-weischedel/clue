@@ -21,6 +21,7 @@ export default function SuggestionScreen({ navigation }) {
     const [revealerInput, setRevealerInput] = useState('');
 
     const [formStage, setFormStage] = useState(0);
+    const [players, setPlayers] = useState(null);
 
     // == FORM STAGES ==
     // 0: Player
@@ -30,6 +31,11 @@ export default function SuggestionScreen({ navigation }) {
     // 4: Revealer
     // 5: Save history and update probabilities
 
+    async function getPlayers() {
+      let save = await readWorkingSave();
+      save = JSON.parse(save);
+      setPlayers(save.players);
+    }
     
     async function updateSave() {
 
@@ -68,34 +74,40 @@ export default function SuggestionScreen({ navigation }) {
       if (formStage != 0) setFormStage(formStage - 1);
     }
 
-    switch (formStage) {
-      case 0:
-        return (
-          <PlayerForm playerInput={playerInput} setPlayerInput={setPlayerInput} handleNext={handleNext} handleBack={handleBack} />
-        );
-      case 1:
-        return (
-          <SuspectForm suspectInput={suspectInput} setSuspectInput={setSuspectInput} handleNext={handleNext} handleBack={handleBack} />
-        );
-      case 2:
-        return (
-          <WeaponForm weaponInput={weaponInput} setWeaponInput={setWeaponInput} handleNext={handleNext} handleBack={handleBack} />
-        );
-      case 3:
-        return (
-          <RoomForm roomInput={roomInput} setRoomInput={setRoomInput} handleNext={handleNext} handleBack={handleBack} />
-        );
-      case 4:
-        return (
-          <RevealerForm revealerInput={revealerInput} setRevealerInput={setRevealerInput} handleNext={handleNext} handleBack={handleBack} />
-        );
-      case 5:
-        return (
-          <Loading />
-        );
+    if (players) {
+      switch (formStage) {
+        case 0:
+          return (
+            <PlayerForm players={players} playerInput={playerInput} setPlayerInput={setPlayerInput} handleNext={handleNext} handleBack={handleBack} />
+          );
+        case 1:
+          return (
+            <SuspectForm suspectInput={suspectInput} setSuspectInput={setSuspectInput} handleNext={handleNext} handleBack={handleBack} />
+          );
+        case 2:
+          return (
+            <WeaponForm weaponInput={weaponInput} setWeaponInput={setWeaponInput} handleNext={handleNext} handleBack={handleBack} />
+          );
+        case 3:
+          return (
+            <RoomForm roomInput={roomInput} setRoomInput={setRoomInput} handleNext={handleNext} handleBack={handleBack} />
+          );
+        case 4:
+          return (
+            <RevealerForm players={players} revealerInput={revealerInput} setRevealerInput={setRevealerInput} handleNext={handleNext} handleBack={handleBack} />
+          );
+        case 5:
+          return (
+            <Loading />
+          );
+      }
+    } else {
+      getPlayers();
+      return (
+        <Loading />
+      );
     }
 }
-
 
 const styles = StyleSheet.create({
   container: {
