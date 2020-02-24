@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignContent: 'center',
         justifyContent: 'center',
-        paddingHorizontal: 30,
+        paddingLeft: 15,
+        paddingRight: 30,
         borderBottomColor: '#ccc',
         borderBottomWidth: 1,
         borderStyle: 'solid'
@@ -75,15 +76,17 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start'
     },
-    detailsContainer: {
-        paddingBottom: 20,
-        paddingLeft: 25
+    index: {
+        fontFamily: 'robotomono-light',
+        textAlign: 'right',
+        width: 30,
+        marginRight: 20
     },
     summaryText: {
         fontSize: 14,
     },
-    index: {
-        fontFamily: 'robotomono-light',
-        width: 25
+    detailsContainer: {
+        paddingBottom: 20,
+        marginLeft: 50
     }
 });
