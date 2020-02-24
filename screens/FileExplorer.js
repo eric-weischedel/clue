@@ -4,6 +4,7 @@ import * as FS from 'expo-file-system';
 import { Button } from 'react-native-paper';
 
 import Loading from '../components/Loading.js';
+import { readFile } from '../global/FileSystem.js';
 
 export default function FileExplorer() {
 
@@ -44,19 +45,23 @@ export default function FileExplorer() {
         .catch(() => console.log(msgFailure));
     }
 
-    function handleItemPress(fileName) {
-      console.log(`[BEGIN] Reading file "${fileName}" to display...`)
+    async function handleItemPress(fileName) {
+      // console.log(`[BEGIN] Reading file "${fileName}" to display...`)
 
-      let msgSuccess = '[SUCCESS] Success reading file.';
-      let msgFailure = '[ERROR] Failure reading file.';
-      let uri = FS.documentDirectory + fileName;
-      FS.readAsStringAsync(uri)
-        .then((contents) => {
-          setFileText(contents);
-          setSelected(fileName);
-          console.log(msgSuccess);
-        })
-        .catch(() => console.log(msgFailure));
+      // let msgSuccess = '[SUCCESS] Success reading file.';
+      // let msgFailure = '[ERROR] Failure reading file.';
+      // let uri = FS.documentDirectory + fileName;
+      // FS.readAsStringAsync(uri)
+      //   .then((contents) => {
+      //     setFileText(contents);
+      //     setSelected(fileName);
+      //     console.log(msgSuccess);
+      //   })
+      //   .catch(() => console.log(msgFailure));
+
+      let contents = await readFile(fileName);
+      setFileText(contents);
+      setSelected(fileName);
     }
 
     if (filesLoaded) {
