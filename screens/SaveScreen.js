@@ -4,6 +4,7 @@ import * as FS from 'expo-file-system';
 
 import BaseForm from '../components/BaseForm.js';
 import Loading from '../components/Loading.js';
+import { getWorkingSave } from '../global/FileSystem.js';
 
 export default function SaveScreen(props) {
   
@@ -11,20 +12,10 @@ export default function SaveScreen(props) {
   const [filesLoaded, setFilesLoaded] = useState(false);
   const [files, setFiles] = useState([null]);
 
-  function getSelected() {
-    console.log('[BEGIN] Reading appState to get selected game...');
-
-    let msgSuccess = '[SUCCESS] Success reading appState.';
-    let msgFailure = '[ERROR] Error reading appState.';
-    let uri = FS.documentDirectory + 'appState.json';
-    FS.readAsStringAsync(uri)
-      .then((contents) => {
-        let appState = JSON.parse(contents);
-        setSelected(appState.workingSave.slice(0, -10));
-        setFilesLoaded(true);
-        console.log(msgSuccess);
-      })
-      .catch(() => console.log(msgFailure));
+  async function getSelected() {
+    let save = await getWorkingSave();
+    setSelected(save.slice(0, -10));
+    setFilesLoaded(true);
   }
 
   function loadDir() {

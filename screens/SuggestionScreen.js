@@ -9,6 +9,7 @@ import RoomForm from '../components/SuggestionRoomForm.js';
 import RevealerForm from '../components/SuggestionRevealerForm.js';
 
 import Loading from '../components/Loading.js';
+import { readWorkingSave, getWorkingSave } from '../global/FileSystem.js';
 
 
 export default function SuggestionScreen({ navigation }) {
@@ -30,49 +31,28 @@ export default function SuggestionScreen({ navigation }) {
     // 5: Save history and update probabilities
 
     
-    function updateSave() {
-      console.log('[BEGIN] Updating save. Getting working save...');
-      // 1. Get working save 2. Read working save 3. Update working save
+    async function updateSave() {
 
-      let msgSuccess = '[SUCCESS] Successfully read appstate to retrieve workingSave.';
-      let msgFailure = '[ERROR] Error reading appstate.';
-      let uri = FS.documentDirectory + 'appState.json';
-      FS.readAsStringAsync(uri)
-        .then((contents) => {
-          let appState = JSON.parse(contents);
-          let fileName = appState.workingSave;
+      let fileName = await getWorkingSave();
+
+      let save = await readWorkingSave();
+      console.log(save);
+      save = JSON.parse(save);
+      save.suggestionHistory.push(
+        {
+          player: playerInput,
+          cards: [suspectInput, weaponInput, roomInput],
+          revealer: revealerInput
+        }
+      );
+
+      let msgSuccess = `[SUCCESS] Success writing to save.`;
+      let msgFailure = `[ERROR] Error writing to save.`;
+      let uri = FS.documentDirectory + fileName;
+      FS.writeAsStringAsync(uri, JSON.stringify(save, null, 2))
+        .then(() => {
           console.log(msgSuccess);
-
-          console.log('[BEGIN] Reading save file...');
-
-          let msgSuccess2 = `[SUCCESS] Success reading file "${fileName}".`;
-          let msgFailure2 = `[ERROR] Error reading file "${fileName}".`;
-          let uri2 = FS.documentDirectory + fileName;
-          FS.readAsStringAsync(uri2)
-            .then((contents) => {
-              let file = JSON.parse(contents);
-              file.suggestionHistory.push(
-                {
-                  player: playerInput,
-                  cards: [suspectInput, weaponInput, roomInput],
-                  revealer: revealerInput
-                }
-              );
-              console.log(msgSuccess2);
-
-              console.log(`[BEGIN] Pushing updated suggestion history to "${fileName}"...`);
-
-              let msgSuccess3 = `[SUCCESS] Success writing to "${fileName}".`;
-              let msgFailure3 = `[ERROR] Error writing to "${fileName}".`;
-              let uri3 = FS.documentDirectory + fileName;
-              FS.writeAsStringAsync(uri3, JSON.stringify(file, null, 2))
-                .then(() => {
-                  console.log(msgSuccess3);
-                  navigation.pop();
-                })
-                .catch(() => console.log(msgFailure3));
-            })
-            .catch(() => console.log(msgFailure2));
+          navigation.pop();
         })
         .catch(() => console.log(msgFailure));
     }

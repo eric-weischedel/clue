@@ -5,39 +5,18 @@ import { Button } from 'react-native-paper';
 
 import HistoryItem from '../components/HistoryItem.js';
 import Loading from '../components/Loading.js';
+import { readWorkingSave } from '../global/FileSystem.js';
 
 export default function HistoryScreen({ navigation }) {
 
   const [historyLoaded, setHistoryLoaded] = useState(false);
   const [history, setHistory] = useState([]);
 
-  function getHistory() {
-    console.log('[BEGIN] Reading appState to get working save...');
-
-    let msgSuccess = '[SUCCESS] Success reading appState.';
-    let msgFailure = '[ERROR] Error reading appState.';
-    let uri = FS.documentDirectory + 'appState.json';
-    FS.readAsStringAsync(uri)
-      .then((contents) => {
-        let appState = JSON.parse(contents);
-        let workingSave = appState.workingSave;
-        console.log(msgSuccess);
-
-        console.log(`[BEGIN] Reading file "${workingSave}" for suggestion history...`)
-
-        let msgSuccess2 = `[SUCCESS] Success reading file "${workingSave}".`;
-        let msgFailure2 = `[ERROR] Error reading file "${workingSave}".`;
-        let uri2 = FS.documentDirectory + workingSave;
-        FS.readAsStringAsync(uri2)
-          .then((contents) => {
-            let save = JSON.parse(contents);
-            setHistory(addKeys(save.suggestionHistory));
-            setHistoryLoaded(true);
-            console.log(msgSuccess2);
-          })
-          .catch(() => console.log(msgFailure2));
-      })
-      .catch(() => console.log(msgFailure));
+  async function getHistory() {
+    let save = await readWorkingSave();
+    save = JSON.parse(save);
+    setHistory(addKeys(save.suggestionHistory));
+    setHistoryLoaded(true);
   }
 
   function addKeys(hist) {
