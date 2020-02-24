@@ -6,7 +6,7 @@ import Colors from '../styles/Colors.js';
 export default function Loading() {
   return (
     <View style={styles.container}>
-      <ActivityIndicator size='large' color={Colors.loading}/>
+      <ActivityIndicator size={70} color={Colors.loading}/>
     </View>
   );
 }

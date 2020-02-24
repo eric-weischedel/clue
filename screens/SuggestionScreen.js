@@ -8,6 +8,8 @@ import WeaponForm from '../components/SuggestionWeaponForm.js';
 import RoomForm from '../components/SuggestionRoomForm.js';
 import RevealerForm from '../components/SuggestionRevealerForm.js';
 
+import Loading from '../components/Loading.js';
+
 
 export default function SuggestionScreen({ navigation }) {
 
@@ -16,7 +18,6 @@ export default function SuggestionScreen({ navigation }) {
     const [weaponInput, setWeaponInput] = useState('');
     const [roomInput, setRoomInput] = useState('');
     const [revealerInput, setRevealerInput] = useState('');
-    const [saveJson, setSaveJson] = useState('');
 
     const [formStage, setFormStage] = useState(0);
 
@@ -66,8 +67,8 @@ export default function SuggestionScreen({ navigation }) {
               let uri3 = FS.documentDirectory + fileName;
               FS.writeAsStringAsync(uri3, JSON.stringify(file, null, 2))
                 .then(() => {
-                  setSaveJson(JSON.stringify(file, null, 2));
                   console.log(msgSuccess3);
+                  navigation.pop();
                 })
                 .catch(() => console.log(msgFailure3));
             })
@@ -110,17 +111,7 @@ export default function SuggestionScreen({ navigation }) {
         );
       case 5:
         return (
-          <View style={styles.container}>
-            <ScrollView>
-              <Text>Suggestion recorded as -</Text>
-              <Text>Player: {playerInput}</Text>
-              <Text>Suspect: {suspectInput}</Text>
-              <Text>Weapon: {weaponInput}</Text>
-              <Text>Room: {roomInput}</Text>
-              <Text>Revealer: {revealerInput}</Text>
-              <Text>JSON: {saveJson}</Text>
-            </ScrollView>
-          </View>
+          <Loading />
         );
     }
 }
