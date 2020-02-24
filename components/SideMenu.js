@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#000',
         marginLeft: 20,
-        marginVertical: 27,
+        marginVertical: 24,
         fontFamily: 'poppins-bold'
     },
     navItem: {

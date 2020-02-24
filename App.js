@@ -26,7 +26,7 @@ export default function App() {
 
   if (fontsLoaded) {
     return (
-      <SafeAreaView style={{flex: 1, paddingTop: StatusBar.currentHeight, backgroundColor: 'gray'}}>
+      <SafeAreaView style={{flex: 1, paddingTop: StatusBar.currentHeight, backgroundColor: '#444444'}}>
         <DrawerNavigator />
       </SafeAreaView>
     );

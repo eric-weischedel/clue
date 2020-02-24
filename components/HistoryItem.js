@@ -30,8 +30,10 @@ export default function HistoryItem(props) {
                     <Icon name='chevron-up' type='evilicon' size={24} color='#333'/>
                 </View>
                 <View style={styles.detailsContainer}>
-                    <Text style={{fontStyle: 'italic'}}>{props.cards[0]}, {props.cards[1]}, {props.cards[2]}</Text>
-                    <Text><Text style={{fontWeight: 'bold'}}>{props.revealer}</Text> revealed a card.</Text>
+                    <Text style={styles.summaryText}>{props.cards[0]}, {props.cards[1]}, {props.cards[2]}</Text>
+                    <Text style={styles.summaryText}>
+                        <Text style={{fontWeight: 'bold'}}>{props.revealer}</Text> revealed a card.
+                    </Text>
                 </View>
             </TouchableOpacity>
         );
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
         paddingLeft: 25
     },
     summaryText: {
-        fontSize: 14
+        fontSize: 14,
     },
     index: {
         fontFamily: 'robotomono-light',
