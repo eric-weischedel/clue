@@ -33,7 +33,6 @@ export function getCards() {
 function objectify(arr) {
     return arr.map((value, index) => (
         {
-            key: index.toString(),
             name: value,
             probability: null
         }
@@ -48,7 +47,6 @@ function setProbabilities(arr, myCards) {
             p = Math.round(p * 100);
         }
         return {
-            key: value.key,
             name: value.name,
             probability: p
         };

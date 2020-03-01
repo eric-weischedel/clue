@@ -20,7 +20,7 @@ export default function Tab(props) {
         showsVerticalScrollIndicator={false}
         data={clueCards}
         renderItem={({ item }) => (
-          <View style={[styles.cardContainer, checkforEven(item.key)]}>
+          <View style={[styles.cardContainer, checkforEven(clueCards.indexOf(item))]}>
             <Text style={styles.cardText}>{item.name}</Text>
             <View style={styles.percentageContainer}>
               <Text style={styles.probabilityText}>{item.probability}%</Text>
@@ -33,6 +33,7 @@ export default function Tab(props) {
             </View>
           </View>
         )}
+        keyExtractor={item => (clueCards.indexOf(item)).toString()}
       />
     </View>
   );
