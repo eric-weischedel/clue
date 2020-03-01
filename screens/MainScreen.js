@@ -1,36 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, StatusBar } from 'react-native';
 import { FAB } from 'react-native-paper';
 import { Icon } from 'react-native-elements'
 
 import TabNavigator from '../navigation/TabNavigator.js';
 import Colors from '../styles/Colors.js';
+import Loading from '../components/Loading.js';
 import { getCards } from '../algorithm/getCards.js';
 
 export default function MainScreen({ navigation }) {
 
-  const cards = getCards();
+  const [cards, setCards] = useState(null);
 
-  return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      {/* Header */}
-      <View style={styles.headerContainer}>
-        <Text style={ styles.headerText }>Probabilities</Text>
-        <TouchableOpacity style={ styles.menuButton } onPress={() => navigation.openDrawer()}>
-          <Icon name='menu' type='feather' size={26} color={Colors.primary}/>
-        </TouchableOpacity>
-      </View>
-      {/* Tabs */}
-      <TabNavigator screenProps={ cards } />
-      {/* FAB */}
-      <FAB 
-        style={styles.fab} 
-        color='white'
-        icon='lightbulb-on'
-        onPress={() => navigation.push('Suggestion')} 
-      />
-    </SafeAreaView>
-  );
+  async function loadCards() {
+    let cards = await getCards();
+    setCards(cards);
+  }
+
+  if (cards) {
+    return (
+      <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+        {/* Header */}
+        <View style={styles.headerContainer}>
+          <Text style={ styles.headerText }>Probabilities</Text>
+          <TouchableOpacity style={ styles.menuButton } onPress={() => navigation.openDrawer()}>
+            <Icon name='menu' type='feather' size={26} color={Colors.primary}/>
+          </TouchableOpacity>
+        </View>
+        {/* Tabs */}
+        <TabNavigator screenProps={ cards } />
+        {/* FAB */}
+        <FAB 
+          style={styles.fab} 
+          color='white'
+          icon='lightbulb-on'
+          onPress={() => navigation.push('Suggestion')} 
+        />
+      </SafeAreaView>
+    );
+  } else {
+    loadCards();
+    return (
+      <Loading />
+    );
+  }
 }
 
 const styles = StyleSheet.create({

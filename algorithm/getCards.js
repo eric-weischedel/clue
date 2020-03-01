@@ -1,22 +1,27 @@
 import GameCards from '../assets/cards.js';
+import { readWorkingSave } from '../global/FileSystem.js';
 
-export function getCards() {
-    let myCards = {
-        suspects: [
-            'Colonel Mustard',
-            'Miss Scarlet',
-            'Mrs. Peacock'
-        ],
-        weapons: [
-            'Candlestick',
-            'Wrench'
-        ],
-        rooms: [
-            'Ball Room',
-            'Billiard Room',
-            'Study'
-        ]
-    };
+export async function getCards() {
+    let file = await readWorkingSave();
+    let save = JSON.parse(file);
+    let myCards = save.myCards;
+    // let myCards = {
+    //     suspects: [
+    //         'Colonel Mustard',
+    //         'Miss Scarlet',
+    //         'Mrs. Peacock',
+    //         'Mrs. White'
+    //     ],
+    //     weapons: [
+    //         'Candlestick',
+    //         'Wrench'
+    //     ],
+    //     rooms: [
+    //         'Ball Room',
+    //         'Billiard Room',
+    //         'Study'
+    //     ]
+    // };
 
     let cards       = GameCards;
     let suspects    = sortByP(setProbabilities(objectify(cards.suspects), myCards.suspects));

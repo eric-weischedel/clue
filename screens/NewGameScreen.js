@@ -30,7 +30,12 @@ export default function NewGameScreen() {
         console.log('[BEGIN] Initializing new game...');
 
         let save = {
-            myCards: suspectsInput.concat(weaponsInput).concat(roomsInput),
+            // myCards: suspectsInput.concat(weaponsInput).concat(roomsInput),
+            myCards: {
+                suspects: suspectsInput,
+                weapons: weaponsInput,
+                rooms: roomsInput
+            },
             players: playersInput,
             suggestionHistory: [],
             version: versionInput,
