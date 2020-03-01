@@ -1,36 +1,62 @@
 import GameCards from '../assets/cards.js';
 
-
 export function getCards() {
-    let cards = GameCards;
-    let suspects = sortByP(addKeysAndProbabilities(cards.suspects));
-    let weapons = sortByP(addKeysAndProbabilities(cards.weapons));
-    let rooms = sortByP(addKeysAndProbabilities(cards.rooms));
+    let myCards = {
+        suspects: [
+            'Colonel Mustard',
+            'Miss Scarlet',
+            'Mrs. Peacock'
+        ],
+        weapons: [
+            'Candlestick',
+            'Wrench'
+        ],
+        rooms: [
+            'Ball Room',
+            'Billiard Room',
+            'Study'
+        ]
+    };
+
+    let cards       = GameCards;
+    let suspects    = sortByP(setProbabilities(objectify(cards.suspects), myCards.suspects));
+    let weapons     = sortByP(setProbabilities(objectify(cards.weapons), myCards.weapons));
+    let rooms       = sortByP(setProbabilities(objectify(cards.rooms), myCards.rooms));
+
     return {
         suspects: suspects,
         weapons: weapons,
         rooms: rooms
-    }
+    };
 }
 
-/* HELPER FUNCTIONS */
-
-function getPct(arr) {
-    return Math.round((1 / arr.length) * 100);
-}
-  
-function sortByP(arr) {
-    return arr.sort(function(a, b) {
-        return b.probability - a.probability;
-    });
-}
-
-function addKeysAndProbabilities(arr) {
+function objectify(arr) {
     return arr.map((value, index) => (
         {
             key: index.toString(),
             name: value,
-            probability: getPct(arr)
+            probability: null
         }
     ));
+}
+
+function setProbabilities(arr, myCards) {
+    return arr.map(function(value, index) {
+        let p = 0;
+        if (!myCards.includes(value.name)) {
+            p = 1 / (arr.length - myCards.length);
+            p = Math.round(p * 100);
+        }
+        return {
+            key: value.key,
+            name: value.name,
+            probability: p
+        };
+    });
+}
+
+function sortByP(arr) {
+    return arr.sort(function(a, b) {
+        return b.probability - a.probability;
+    });
 }
