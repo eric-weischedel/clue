@@ -23,6 +23,9 @@ export default function MainScreen({ navigation }) {
         {/* Header */}
         <View style={styles.headerContainer}>
           <Text style={ styles.headerText }>Probabilities</Text>
+          <TouchableOpacity style={ styles.menuButton } onPress={() => loadCardsAsync()}>
+            <Icon name='refresh-cw' type='feather' size={24} color={Colors.loading}/>
+          </TouchableOpacity>
           <TouchableOpacity style={ styles.menuButton } onPress={() => navigation.openDrawer()}>
             <Icon name='menu' type='feather' size={26} color={Colors.primary}/>
           </TouchableOpacity>
