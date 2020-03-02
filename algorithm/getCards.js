@@ -1,10 +1,11 @@
 import GameCards from '../assets/cards.js';
 import { readWorkingSave } from '../global/FileSystem.js';
 
-export async function getCards() {
+export async function getCardsAsync() {
     let file = await readWorkingSave();
     let save = JSON.parse(file);
     let myCards = save.myCards;
+    
     // let myCards = {
     //     suspects: [
     //         'Colonel Mustard',

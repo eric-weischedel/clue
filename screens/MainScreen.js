@@ -6,14 +6,14 @@ import { Icon } from 'react-native-elements'
 import TabNavigator from '../navigation/TabNavigator.js';
 import Colors from '../styles/Colors.js';
 import Loading from '../components/Loading.js';
-import { getCards } from '../algorithm/getCards.js';
+import { getCardsAsync } from '../algorithm/getCards.js';
 
 export default function MainScreen({ navigation }) {
 
   const [cards, setCards] = useState(null);
 
-  async function loadCards() {
-    let cards = await getCards();
+  async function loadCardsAsync() {
+    let cards = await getCardsAsync();
     setCards(cards);
   }
 
@@ -39,7 +39,7 @@ export default function MainScreen({ navigation }) {
       </SafeAreaView>
     );
   } else {
-    loadCards();
+    loadCardsAsync();
     return (
       <Loading />
     );
