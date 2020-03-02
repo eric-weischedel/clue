@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, StatusBar } from 'react-native';
 import { FAB } from 'react-native-paper';
-import { Icon } from 'react-native-elements'
+import { Icon } from 'react-native-elements';
 
 import TabNavigator from '../navigation/TabNavigator.js';
 import Colors from '../styles/Colors.js';
