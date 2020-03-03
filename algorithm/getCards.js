@@ -20,7 +20,7 @@ class ProbabilitiesMap {
     getMap() {
         return this.map.sort(function(a, b) {
             return b.probability - a.probability;
-        });;
+        });
     }
 
     objectify() {
