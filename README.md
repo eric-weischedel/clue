@@ -47,8 +47,8 @@ Due to its high popularity I decided to create a React Native app using [Expo](h
 
 #### Challenges I Overcame ####
 - Setting up navigation
-- Creating a multi-screen form for user input
-- Implementing file reads and writes
+- Creating multi-screen forms for user input
+- Implementing local storage read/write
 
 ### (*IN PROGRESS*) Probability Algorithm ###
 
