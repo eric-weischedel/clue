@@ -30,7 +30,9 @@ expo start
 - Save your game for later and have multiple games going at once
 
 ## Screenshots ##
-[insert screenshots of app]
+<img src="assets/readme/home.jpg" width="200">
+<img src="assets/readme/suggestion.jpg" width="200">
+<img src="assets/readme/menu.jpg" width="200">
 
 ## Development Process ##
 
@@ -48,10 +50,9 @@ Due to its high popularity I decided to create a React Native app using [Expo](h
 - Creating a multi-screen form for user input
 - Implementing file reads and writes
 
-### Probability Algorithm ###
+### (*IN PROGRESS*) Probability Algorithm ###
 
 #### Theorizing ####
-This was the hardest part of the project.
 
 #### Programming ####
 
