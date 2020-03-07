@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import BaseForm from './BaseForm.js';
 import Loading from '../components/Loading.js'
-import { readWorkingSave, addKeys } from '../global/FileSystem.js';
+import { addKeys } from '../global/FileSystem.js';
 
 export default function SuggestionPlayerForm(props) {
 

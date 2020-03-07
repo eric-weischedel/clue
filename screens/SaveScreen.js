@@ -13,7 +13,7 @@ export default function SaveScreen(props) {
   const [files, setFiles] = useState([null]);
 
   async function getSelected() {
-    let save = await getWorkingSave();
+    let save = await getWorkingSaveAsync();
     setSelected(save.slice(0, -10));
     setFilesLoaded(true);
   }

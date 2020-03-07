@@ -5,7 +5,7 @@ import * as FS from 'expo-file-system';
 
 import Colors from '../styles/Colors.js';
 import Loading from '../components/Loading.js';
-import { readWorkingSave, getWorkingSave } from '../global/FileSystem.js';
+import { readWorkingSaveAsync, getWorkingSaveAsync } from '../global/FileSystem.js';
 
 
 export default function NotesScreen(props) {
@@ -20,9 +20,9 @@ export default function NotesScreen(props) {
     async function handleWriteNotes() {
       setSaveBtnLoading(true);
 
-      let fileName = await getWorkingSave();
+      let fileName = await getWorkingSaveAsync();
 
-      let save = await readWorkingSave();
+      let save = await readWorkingSaveAsync();
       save = JSON.parse(save);
       save.notes = notesText;
 
@@ -40,7 +40,7 @@ export default function NotesScreen(props) {
     }
 
     async function handleReadNotes() {
-      let save = await readWorkingSave();
+      let save = await readWorkingSaveAsync();
       save = JSON.parse(save);
       let notes = save.notes || 'No notes on file.';
       setNotesText(notes);

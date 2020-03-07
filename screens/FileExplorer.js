@@ -4,7 +4,7 @@ import * as FS from 'expo-file-system';
 import { Button } from 'react-native-paper';
 
 import Loading from '../components/Loading.js';
-import { readFile } from '../global/FileSystem.js';
+import { readFileAsync } from '../global/FileSystem.js';
 
 export default function FileExplorer() {
 
@@ -46,7 +46,7 @@ export default function FileExplorer() {
     }
 
     async function handleItemPress(fileName) {
-      let contents = await readFile(fileName);
+      let contents = await readFileAsync(fileName);
       setFileText(contents);
       setSelected(fileName);
     }

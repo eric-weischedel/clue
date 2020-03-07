@@ -5,7 +5,7 @@ import { Button } from 'react-native-paper';
 
 import HistoryItem from '../components/HistoryItem.js';
 import Loading from '../components/Loading.js';
-import { readWorkingSave } from '../global/FileSystem.js';
+import { readWorkingSaveAsync } from '../global/FileSystem.js';
 
 export default function HistoryScreen({ navigation }) {
 
@@ -13,7 +13,7 @@ export default function HistoryScreen({ navigation }) {
   const [history, setHistory] = useState([]);
 
   async function getHistory() {
-    let save = await readWorkingSave();
+    let save = await readWorkingSaveAsync();
     save = JSON.parse(save);
     setHistory(addKeys(save.suggestionHistory));
     setHistoryLoaded(true);

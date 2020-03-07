@@ -9,7 +9,7 @@ import RoomForm from '../components/SuggestionRoomForm.js';
 import RevealerForm from '../components/SuggestionRevealerForm.js';
 
 import Loading from '../components/Loading.js';
-import { readWorkingSave, getWorkingSave } from '../global/FileSystem.js';
+import { readWorkingSaveAsync, getWorkingSaveAsync } from '../global/FileSystem.js';
 
 
 export default function SuggestionScreen({ navigation }) {
@@ -32,16 +32,16 @@ export default function SuggestionScreen({ navigation }) {
     // 5: Save history and update probabilities
 
     async function getPlayers() {
-      let save = await readWorkingSave();
+      let save = await readWorkingSaveAsync();
       save = JSON.parse(save);
       setPlayers(save.players);
     }
     
     async function updateSave() {
 
-      let fileName = await getWorkingSave();
+      let fileName = await getWorkingSaveAsync();
 
-      let save = await readWorkingSave();
+      let save = await readWorkingSaveAsync();
       console.log(save);
       save = JSON.parse(save);
       save.suggestionHistory.push(

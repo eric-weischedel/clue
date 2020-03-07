@@ -1,5 +1,5 @@
 import GameCards from '../assets/cards.js';
-import { readWorkingSave } from '../global/FileSystem.js';
+import { readWorkingSaveAsync } from '../global/FileSystem.js';
 
 class ProbabilitiesMap {
 
@@ -62,7 +62,7 @@ class ProbabilitiesMap {
 }
 
 export async function getCardsAsync() {
-    let file = await readWorkingSave();
+    let file = await readWorkingSaveAsync();
     let save = JSON.parse(file);
     let myCards = save.myCards;
 

@@ -1,6 +1,6 @@
 import * as FS from 'expo-file-system';
 
-export function readFile(fileName) {
+export function readFileAsync(fileName) {
     return new Promise((resolve, reject) => {
     console.log(`[BEGIN] Reading file "${fileName}"...`)
 
@@ -20,7 +20,7 @@ export function readFile(fileName) {
     });
 }
 
-export function getWorkingSave() {
+export function getWorkingSaveAsync() {
     return new Promise((resolve, reject) => {
         console.log('[BEGIN] Reading appState to get working save...');
 
@@ -40,12 +40,12 @@ export function getWorkingSave() {
     });
 }
 
-export async function readWorkingSave() {
+export async function readWorkingSaveAsync() {
     return new Promise( async (resolve, reject) => {
         console.log('[BEGIN] Reading working save...');
 
-        let workingSave = await getWorkingSave();
-        let contents = await readFile(workingSave);
+        let workingSave = await getWorkingSaveAsync();
+        let contents = await readFileAsync(workingSave);
 
         if (contents) {
             resolve(contents);
