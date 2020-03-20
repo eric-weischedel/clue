@@ -53,7 +53,7 @@ export default function MainScreen({ navigation }) {
   } else {
     loadCardsAsync();
     return (
-      <NoFileScreen navigation={navigation} />
+      <NoFileScreen reload={loadCardsAsync} navigation={navigation} />
     );
   }
 }

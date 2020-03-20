@@ -13,8 +13,17 @@ export default function NoFileScreen(props) {
 
     return (
         <View style={styles.container}>
-            <Text>You must create a new game.</Text>
-            <Button color={Colors.primary} mode='outlined' onPress={handlePress}>Create New Game</Button>
+            <Text>You must create a game to start.</Text>
+            <Button 
+                style={styles.button} 
+                color={Colors.primary} 
+                mode='outlined' 
+                onPress={handlePress}>Create New Game</Button>
+            <Button 
+                style={styles.button} 
+                color={Colors.secondary} 
+                mode='outlined' 
+                onPress={props.reload}>Reload</Button>
         </View>
     );
 }
@@ -26,5 +35,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#fff',
         paddingHorizontal: 30
-      }
+    },
+    button: {
+        marginVertical: 10
+    }
 });
