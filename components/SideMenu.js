@@ -13,7 +13,7 @@ export default function SideMenu({ navigation }) {
                 <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Notes')}>
                     <Icon
                         style={styles.navIcon}
-                        name='edit'
+                        name='clipboard'
                         type='feather'
                         color='#000'
                         size={24}
@@ -30,6 +30,17 @@ export default function SideMenu({ navigation }) {
                         size={24}
                     />
                     <Text style={styles.navText}>Turn History</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.navItem} onPress={() => console.log('My Cards page WIP')}>
+                    <Icon
+                        style={styles.navIcon}
+                        name='cards-outline'
+                        type='material-community'
+                        color='#000'
+                        size={24}
+                    />
+                    <Text style={styles.navText}>My Cards</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Save')}>
