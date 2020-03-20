@@ -1,59 +1,112 @@
 import * as FS from 'expo-file-system';
 
-export function readFileAsync(fileName) {
-    return new Promise((resolve, reject) => {
-    console.log(`[BEGIN] Reading file "${fileName}"...`)
-
-    let msgSuccess = `[SUCCESS] Success reading "${fileName}".`;
-    let msgFailure = `[ERROR] Failure reading "${fileName}".`;
-    let uri = FS.documentDirectory + fileName;
-
-    FS.readAsStringAsync(uri)
-        .then((contents) => {
-            console.log(msgSuccess);
-            resolve(contents);
-        })
-        .catch(() => {
-            console.log(msgFailure);
-            reject();
-        });
-    });
+// LOGGING HELPERS
+function logBegin(action) {
+    console.log('BEGIN ' + action + '...');
+}
+function logSuccess(action) {
+    console.log('SUCCESS ' + action);
+}
+function logFailure(action) {
+    console.log('FAILURE ' + action);
 }
 
-export function getWorkingSaveAsync() {
+// READS
+export function readFileAsync(fileName) {
     return new Promise((resolve, reject) => {
-        console.log('[BEGIN] Reading appState to get working save...');
 
-        let msgSuccess = '[SUCCESS] Success getting working save.';
-        let msgFailure = '[ERROR] Error getting working save.';
-        let uri = FS.documentDirectory + 'appState.json';
+        let action = `Reading file "${fileName}"`;
+        logBegin(action);
+
+        let uri = FS.documentDirectory + fileName;
+
         FS.readAsStringAsync(uri)
             .then((contents) => {
-                let appState = JSON.parse(contents);
-                console.log(msgSuccess);
-                resolve(appState.workingSave);
+                logSuccess(action);
+                resolve(contents);
             })
             .catch(() => {
-                console.log(msgFailure);
-                reject();
+                logFailure(action);
+                reject(null);
             });
     });
 }
 
-export async function readWorkingSaveAsync() {
+export function readAppStateAsync() {
+    return new Promise(async(resolve, reject) => {
+
+        let action = 'Reading app state';
+        logBegin(action);
+
+        let uri = FS.documentDirectory + 'appState.json';
+        let appState = await readFileAsync(uri);
+        if (appState !== null) {
+            logSuccess(action);
+            resolve(JSON.parse(appState));
+        } else {
+            logFailure(action);
+            reject(null);
+        }
+    });
+}
+
+export function getWorkingSaveAsync() {
+    return new Promise(async(resolve, reject) => {
+
+        let action = 'Getting working save filename';
+        logBegin(action);
+
+        let appState = await readAppStateAsync();
+
+        if (appState !== null) {
+            logSuccess(action);
+            resolve(appState.workingSave);
+        } else {
+            logFailure(action);
+            reject(null);
+        }
+    });
+}
+
+export function readWorkingSaveAsync() {
     return new Promise( async (resolve, reject) => {
-        console.log('[BEGIN] Reading working save...');
+
+        let action = 'Reading working save';
+        logBegin(action);
 
         let workingSave = await getWorkingSaveAsync();
         let contents = await readFileAsync(workingSave);
 
-        if (contents) {
+        if (contents !== null) {
+            logSuccess(action);
             resolve(contents);
         } else {
-            reject();
+            logFailure(action);
+            reject(null);
         }
     });
 }
+
+export function readDirectoryAsync() {
+    return new Promise((resolve, reject) => {
+
+        let action = 'Reading document directory';
+        logBegin(action);
+
+        let uri = FS.documentDirectory;
+        
+        FS.readDirectoryAsync(uri)
+            .then((contents) => {
+                logSuccess(action);
+                resolve(contents);
+            })
+            .catch(() => {
+                logFailure(action);
+                reject(null);
+            });
+    })
+}
+
 
 export function addKeys(arr) {
     return arr.map((value, index) => (
