@@ -25,7 +25,7 @@ export function readFileAsync(fileName) {
                 logSuccess(action);
                 resolve(contents);
             })
-            .catch(() => {
+            .catch((error) => {
                 logFailure(action);
                 reject(null);
             });
@@ -38,8 +38,8 @@ export function readAppStateAsync() {
         let action = 'Reading app state';
         logBegin(action);
 
-        let uri = FS.documentDirectory + 'appState.json';
-        let appState = await readFileAsync(uri);
+        let appState = await readFileAsync('appState.json');
+        
         if (appState !== null) {
             logSuccess(action);
             resolve(JSON.parse(appState));

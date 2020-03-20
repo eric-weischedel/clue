@@ -7,6 +7,9 @@ import TabNavigator from '../navigation/TabNavigator.js';
 import Colors from '../styles/Colors.js';
 import Loading from '../components/Loading.js';
 import { getCardsAsync } from '../algorithm/getCards.js';
+import { readAppStateAsync } from '../global/FileSystem.js';
+import NoFileScreen from './NoFile.js';
+import FileExplorer from './FileExplorer.js';
 
 export default function MainScreen({ navigation }) {
 
@@ -15,6 +18,12 @@ export default function MainScreen({ navigation }) {
   async function loadCardsAsync() {
     let cards = await getCardsAsync();
     setCards(cards);
+  }
+
+  async function appStateExistsAsync() {
+    let appState = await readAppStateAsync();
+    let exists = appState === null ? false : true;
+    return exists;
   }
 
   if (cards) {
@@ -44,7 +53,7 @@ export default function MainScreen({ navigation }) {
   } else {
     loadCardsAsync();
     return (
-      <Loading />
+      <NoFileScreen navigation={navigation} />
     );
   }
 }
