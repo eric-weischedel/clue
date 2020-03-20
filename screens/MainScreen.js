@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
 import { FAB } from 'react-native-paper';
 import { Icon } from 'react-native-elements';
 
@@ -7,9 +7,7 @@ import TabNavigator from '../navigation/TabNavigator.js';
 import Colors from '../styles/Colors.js';
 import Loading from '../components/Loading.js';
 import { getCardsAsync } from '../algorithm/getCards.js';
-import { readAppStateAsync } from '../global/FileSystem.js';
 import NoFileScreen from './NoFile.js';
-import FileExplorer from './FileExplorer.js';
 
 export default function MainScreen({ navigation }) {
 
@@ -18,12 +16,6 @@ export default function MainScreen({ navigation }) {
   async function loadCardsAsync() {
     let cards = await getCardsAsync();
     setCards(cards);
-  }
-
-  async function appStateExistsAsync() {
-    let appState = await readAppStateAsync();
-    let exists = appState === null ? false : true;
-    return exists;
   }
 
   if (cards) {
