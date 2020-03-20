@@ -8,9 +8,9 @@ export default function Tab(props) {
 
   const clueCards = props.cards;
 
-  function checkforEven(key) {
+  function colorAlternate(key) {
     if (parseInt(key) % 2 == 0) {
-      return { backgroundColor: '#FBFBFB' }
+      return { backgroundColor: '#F8F8F8' }
     }
   }
 
@@ -20,7 +20,7 @@ export default function Tab(props) {
         showsVerticalScrollIndicator={false}
         data={clueCards}
         renderItem={({ item }) => (
-          <View style={[styles.cardContainer, checkforEven(clueCards.indexOf(item))]}>
+          <View style={[styles.cardContainer, colorAlternate(clueCards.indexOf(item))]}>
             <Text style={styles.cardText}>{item.name}</Text>
             <View style={styles.percentageContainer}>
               <Text style={styles.probabilityText}>{item.probability}%</Text>
